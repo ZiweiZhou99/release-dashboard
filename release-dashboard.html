@@ -1372,13 +1372,13 @@ if(typeof SF!=='undefined') window.SF=SF;
 </div>
 
 <script>
-const KB_API = '';
+const KB_API = '/kb-api';
 let kbOpen = false, kbBusy = false;
 
 // ─── 状态检查 ───────────────────────────────────────────
 async function kbCheckStatus(){
   try{
-    const r = await fetch(`${KB_API}/api/status`,{signal:AbortSignal.timeout(5000)});
+    const r = await fetch(`${KB_API}/status`,{signal:AbortSignal.timeout(5000)});
     const d = await r.json();
     document.getElementById('kb-dot').className='ok';
     document.getElementById('kb-status-txt').textContent=`已连接 · ${d.total_chunks} 个知识片段`;
@@ -1452,7 +1452,7 @@ async function kbSend(){
   const loadingDiv = kbAppendMsg('bot','',true);
 
   try{
-    const resp=await fetch(`${KB_API}/api/ask`,{
+    const resp=await fetch(`${KB_API}/ask`,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({question:q})
