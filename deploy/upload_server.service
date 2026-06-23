@@ -1,0 +1,16 @@
+[Unit]
+Description=Release Platform Upload Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/release-platform
+ExecStart=/usr/bin/python3 /home/ubuntu/release-platform/upload_server.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/ubuntu/release-platform/logs/upload_server.log
+StandardError=append:/home/ubuntu/release-platform/logs/upload_server.log
+
+[Install]
+WantedBy=multi-user.target

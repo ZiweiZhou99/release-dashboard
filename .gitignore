@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Knowledge base index (large, rebuild via kb_indexer.py)
+kb/
+kb/bm25_index.pkl
+kb/chunks.json
+
+# Runtime data & logs
+logs/
+backups/
+data/nps_month*.csv
+*.log
+
+# Local config / secrets
+.config/
+.env
+*.bak_*
+
+# OS
+.DS_Store

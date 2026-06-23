@@ -130,7 +130,7 @@ def build_title_path(ancestors, title):
     return " > ".join(parts)
 
 
-def crawl_page(page_id, token, pages_dict, skip_ids, depth=0, since=None):
+def crawl_page(page_id, token, pages_dict, skip_ids, depth=0):
     """Recursively crawl a page and its children"""
     if page_id in skip_ids:
         print(f"  {'  '*depth}[SKIP] {page_id}")
@@ -160,28 +160,23 @@ def crawl_page(page_id, token, pages_dict, skip_ids, depth=0, since=None):
     # Get last modified
     last_modified = page.get('version', {}).get('when', '')[:10] if page.get('version') else ''
     
-    # 增量模式：跳过未修改的页面（但仍然递归其子页面）
-    if since and last_modified and last_modified <= since:
-        # 不加入 pages_dict，但继续遍历子页面
-        pass
+    page_data = {
+        "id": page_id,
+        "title": title,
+        "url": f"{CONFLUENCE_BASE}/pages/viewpage.action?pageId={page_id}",
+        "parent_title": parent_title,
+        "title_path": title_path,
+        "content": content,
+        "word_count": word_count,
+        "last_modified": last_modified
+    }
+    
+    pages_dict[page_id] = page_data
+    
+    if word_count >= 50:
+        print(f"  {'  '*depth}[PAGE] {title[:50]} ({word_count} chars)")
     else:
-        page_data = {
-            "id": page_id,
-            "title": title,
-            "url": f"{CONFLUENCE_BASE}/pages/viewpage.action?pageId={page_id}",
-            "parent_title": parent_title,
-            "title_path": title_path,
-            "content": content,
-            "word_count": word_count,
-            "last_modified": last_modified
-        }
-        
-        pages_dict[page_id] = page_data
-        
-        if word_count >= 50:
-            print(f"  {'  '*depth}[PAGE] {title[:50]} ({word_count} chars)")
-        else:
-            print(f"  {'  '*depth}[EMPTY] {title[:50]}")
+        print(f"  {'  '*depth}[EMPTY] {title[:50]}")
     
     time.sleep(0.1)  # Rate limiting
     
@@ -200,7 +195,7 @@ def crawl_page(page_id, token, pages_dict, skip_ids, depth=0, since=None):
         for child in children:
             child_id = child['id']
             if child_id not in skip_ids:
-                crawl_page(child_id, token, pages_dict, skip_ids, depth + 1, since=since)
+                crawl_page(child_id, token, pages_dict, skip_ids, depth + 1)
             else:
                 print(f"  {'  '*(depth+1)}[SKIP] {child.get('title', child_id)}")
         
@@ -214,48 +209,30 @@ def crawl_page(page_id, token, pages_dict, skip_ids, depth=0, since=None):
 
 
 def main():
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--since', help='只抓取该日期之后修改的页面 (YYYY-MM-DD)，用于增量更新')
-    parser.add_argument('--merge', help='与已有 chunks.json 合并的目录路径', default=None)
-    args = parser.parse_args()
-
     print("=== Confluence PRD Crawler ===")
     print(f"Root page: {ROOT_PAGE_ID}")
     print(f"Skip IDs: {SKIP_PAGE_IDS}")
-    if args.since:
-        print(f"增量模式: 只抓取 {args.since} 之后修改的页面")
-
+    
     token = read_token()
     print(f"Token loaded: {token[:20]}...")
-
+    
     pages_dict = {}
-
+    
     print("\nStarting crawl...")
-    crawl_page(ROOT_PAGE_ID, token, pages_dict, SKIP_PAGE_IDS, since=args.since)
-
+    crawl_page(ROOT_PAGE_ID, token, pages_dict, SKIP_PAGE_IDS)
+    
+    # Filter out empty pages for final output but keep all in dict
     all_pages = list(pages_dict.values())
     substantial_pages = [p for p in all_pages if p['word_count'] >= 50]
-
+    
     print(f"\n=== Crawl Complete ===")
     print(f"Total pages crawled: {len(all_pages)}")
     print(f"Substantial pages (>=50 chars): {len(substantial_pages)}")
-
-    # 增量模式：与旧数据合并
-    if args.since and args.merge:
-        old_file = os.path.join(args.merge, '../kb_pages_old.json') if not args.merge.endswith('.json') else args.merge
-        # 直接用 OUTPUT_FILE 里的旧数据合并
-        if os.path.exists(OUTPUT_FILE):
-            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
-                old_pages = json.load(f)
-            new_ids = {p['id'] for p in all_pages}
-            merged = [p for p in old_pages if p['id'] not in new_ids] + all_pages
-            print(f"合并旧数据: {len(old_pages)} 条 + 增量 {len(all_pages)} 条 = {len(merged)} 条")
-            all_pages = merged
-
+    
+    # Save all pages
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(all_pages, f, ensure_ascii=False, indent=2)
-
+    
     print(f"Saved to {OUTPUT_FILE}")
     return all_pages
 

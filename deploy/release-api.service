@@ -1,0 +1,16 @@
+[Unit]
+Description=Release Dashboard Update API
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/release-platform
+ExecStart=/usr/bin/python3 /home/ubuntu/release-platform/update_server.py
+Restart=always
+RestartSec=3
+StandardOutput=append:/home/ubuntu/release-platform/logs/api.log
+StandardError=append:/home/ubuntu/release-platform/logs/api.log
+
+[Install]
+WantedBy=multi-user.target
