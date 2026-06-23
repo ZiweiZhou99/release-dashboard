@@ -23,7 +23,8 @@ sudo cp deploy/*.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl enable --now release-http release-api upload_server
 
-# 3. 重建知识库索引（首次或 PRD 更新后）
+# 3. 同步 data/*.json（首次或数据更新后）
+# 前端从 /upload-api/data/*.json 加载，部署时务必带上 data 目录
 python3 kb_crawler.py
 python3 kb_indexer.py
 

@@ -213,6 +213,7 @@ class UploadHandler(http.server.BaseHTTPRequestHandler):
             send_json(self, 200, {'status': 'ok', 'time': datetime.now().isoformat()})
         elif path == '/api/data-status':
             files = {
+                'releases': os.path.exists(os.path.join(DATA_DIR, 'releases.json')),
                 'tickets': os.path.exists(os.path.join(DATA_DIR, 'tickets.json')),
                 'feedback': os.path.exists(os.path.join(DATA_DIR, 'feedback.json')),
                 'store': os.path.exists(os.path.join(DATA_DIR, 'store.json')),
@@ -223,9 +224,12 @@ class UploadHandler(http.server.BaseHTTPRequestHandler):
             mtimes = {}
             for k, exists in files.items():
                 if exists:
-                    fp = os.path.join(DATA_DIR, k + ('.json' if not k.startswith('nps') else ('.csv' if 'month' in k else '.json')))
-                    if k == 'nps_json':
+                    if k.startswith('nps_month'):
+                        fp = os.path.join(DATA_DIR, f'{k}.csv')
+                    elif k == 'nps_json':
                         fp = NPS_JSON
+                    else:
+                        fp = os.path.join(DATA_DIR, f'{k}.json')
                     mtimes[k] = datetime.fromtimestamp(os.path.getmtime(fp)).strftime('%Y-%m-%d %H:%M:%S') if os.path.exists(fp) else None
             send_json(self, 200, {'files': files, 'mtimes': mtimes})
         elif path.startswith('/data/') and path.endswith('.json'):

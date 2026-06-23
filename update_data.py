@@ -13,6 +13,8 @@ import urllib.request, urllib.parse
 
 WORKSPACE = '/home/ubuntu/release-platform'
 HTML_PATH = os.path.join(WORKSPACE, 'release-dashboard.html')
+DATA_DIR = os.path.join(WORKSPACE, 'data')
+RELEASES_JSON = os.path.join(DATA_DIR, 'releases.json')
 CONF_TOKEN_PATH = os.path.join(WORKSPACE, '.config/tokens/confluence.token')
 CONF_COOKIE_PATH = os.path.join(WORKSPACE, '.config/tokens/confluence.cookie')
 SHIMO_TOKEN_PATH = os.path.join(WORKSPACE, '.config/tokens/shimo.token')
@@ -538,20 +540,13 @@ def merge(releases, shimo_blocks):
     log(f"Merged: {matched}/{len(releases)} releases have shimo data")
     return releases
 
-# ─── Update HTML ──────────────────────────────────────────────
-def update_html(releases):
-    with open(HTML_PATH) as f:
-        html = f.read()
-    releases_json = json.dumps(releases, ensure_ascii=False)
-    html_new = re.sub(
-        r'const R=.*?;(\s*const JB)',
-        f'const R={releases_json};\\1',
-        html, flags=re.DOTALL
-    )
-    with open(HTML_PATH, 'w') as f:
-        f.write(html_new)
-    size = os.path.getsize(HTML_PATH) / 1024
-    log(f"HTML updated: {size:.1f} KB")
+# ─── Update data files ────────────────────────────────────────
+def update_releases_data(releases):
+    os.makedirs(DATA_DIR, exist_ok=True)
+    with open(RELEASES_JSON, 'w', encoding='utf-8') as f:
+        json.dump(releases, f, ensure_ascii=False, indent=2)
+    size = os.path.getsize(RELEASES_JSON) / 1024
+    log(f"releases.json updated: {size:.1f} KB ({len(releases)} versions)")
 
 # ─── Main ─────────────────────────────────────────────────────
 def main():
@@ -586,7 +581,7 @@ def main():
             log("无缓存，跳过石墨数据")
 
     releases = merge(releases, shimo_blocks)
-    update_html(releases)
+    update_releases_data(releases)
     log(f"=== 更新完成 ✅  共 {len(releases)} 个版本 ===")
 
 if __name__ == '__main__':

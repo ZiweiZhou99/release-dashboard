@@ -24,6 +24,8 @@ curl -X POST -H "X-Upload-Token: zzw2026" -F "file=@tickets.csv" \
   https://www.zhouziwei.online/upload-api/upload/tickets
 ```
 
-## 读取 API（计划）
+## 读取 API
 
-`GET /upload-api/data/{releases|tickets|feedback|store}` — 公开只读，无需 token。
+`GET /upload-api/data/{releases|tickets|feedback|store}.json` — 公开只读，前端启动时加载。
+
+发版数据更新后写入 `data/releases.json`（`update_data.py`），不再内嵌 HTML。
