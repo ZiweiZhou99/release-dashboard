@@ -17,6 +17,7 @@ import json
 import os
 import csv
 import io
+import gzip
 import threading
 import time
 from datetime import datetime
@@ -44,6 +45,39 @@ def send_json(handler, code, data):
     handler.send_header('Access-Control-Allow-Origin', '*')
     handler.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
     handler.send_header('Access-Control-Allow-Headers', 'Content-Type, X-Upload-Token')
+    handler.end_headers()
+    handler.wfile.write(body)
+
+
+def serve_data_file(handler, fpath: str) -> None:
+    """返回 data 目录下的 JSON，支持 gzip 与浏览器缓存。"""
+    if not os.path.exists(fpath):
+        send_json(handler, 404, {'error': 'not found'})
+        return
+    with open(fpath, 'rb') as f:
+        raw = f.read()
+    mtime = int(os.path.getmtime(fpath))
+    etag = f'"{mtime}-{len(raw)}"'
+    inm = handler.headers.get('If-None-Match', '')
+    if inm == etag:
+        handler.send_response(304)
+        handler.send_header('ETag', etag)
+        handler.send_header('Cache-Control', 'public, max-age=300')
+        handler.send_header('Access-Control-Allow-Origin', '*')
+        handler.end_headers()
+        return
+    accept = (handler.headers.get('Accept-Encoding') or '').lower()
+    use_gzip = 'gzip' in accept and len(raw) > 1024
+    body = gzip.compress(raw, compresslevel=6) if use_gzip else raw
+    handler.send_response(200)
+    handler.send_header('Content-Type', 'application/json; charset=utf-8')
+    handler.send_header('Content-Length', str(len(body)))
+    if use_gzip:
+        handler.send_header('Content-Encoding', 'gzip')
+        handler.send_header('Vary', 'Accept-Encoding')
+    handler.send_header('ETag', etag)
+    handler.send_header('Cache-Control', 'public, max-age=300')
+    handler.send_header('Access-Control-Allow-Origin', '*')
     handler.end_headers()
     handler.wfile.write(body)
 
@@ -217,6 +251,9 @@ class UploadHandler(http.server.BaseHTTPRequestHandler):
                 'tickets': os.path.exists(os.path.join(DATA_DIR, 'tickets.json')),
                 'feedback': os.path.exists(os.path.join(DATA_DIR, 'feedback.json')),
                 'store': os.path.exists(os.path.join(DATA_DIR, 'store.json')),
+                'voice_closure_ledger': os.path.exists(os.path.join(DATA_DIR, 'voice_closure_ledger.json')),
+                'voice_closure_links': os.path.exists(os.path.join(DATA_DIR, 'voice_closure_links.json')),
+                'voice_closure_state': os.path.exists(os.path.join(DATA_DIR, 'voice_closure_state.json')),
                 'nps_month1': os.path.exists(os.path.join(DATA_DIR, 'nps_month1.csv')),
                 'nps_month3': os.path.exists(os.path.join(DATA_DIR, 'nps_month3.csv')),
                 'nps_json': os.path.exists(NPS_JSON),
@@ -233,20 +270,9 @@ class UploadHandler(http.server.BaseHTTPRequestHandler):
                     mtimes[k] = datetime.fromtimestamp(os.path.getmtime(fp)).strftime('%Y-%m-%d %H:%M:%S') if os.path.exists(fp) else None
             send_json(self, 200, {'files': files, 'mtimes': mtimes})
         elif path.startswith('/data/') and path.endswith('.json'):
-            # Serve data files
             fname = os.path.basename(path)
             fpath = os.path.join(DATA_DIR, fname)
-            if os.path.exists(fpath):
-                with open(fpath, 'rb') as f:
-                    body = f.read()
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json; charset=utf-8')
-                self.send_header('Content-Length', str(len(body)))
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.end_headers()
-                self.wfile.write(body)
-            else:
-                send_json(self, 404, {'error': 'not found'})
+            serve_data_file(self, fpath)
         else:
             send_json(self, 404, {'error': 'not found'})
 
@@ -265,6 +291,8 @@ class UploadHandler(http.server.BaseHTTPRequestHandler):
             self._handle_nps_upload()
         elif path == '/upload/nps/rebuild':
             self._handle_nps_rebuild()
+        elif path == '/voice-closure/state':
+            self._handle_voice_closure_state()
         else:
             send_json(self, 404, {'error': 'unknown endpoint'})
 
@@ -360,6 +388,55 @@ class UploadHandler(http.server.BaseHTTPRequestHandler):
             'errors': errors,
             'nps_rebuilt': rebuilt,
             'time': datetime.now().isoformat(),
+        })
+
+    def _handle_voice_closure_state(self):
+        """合并保存用户声音闭环确认状态（voice_closure_state.json）"""
+        try:
+            length = int(self.headers.get('Content-Length', 0))
+            raw = self.rfile.read(length) if length else b'{}'
+            body = json.loads(raw.decode('utf-8') or '{}')
+        except Exception as e:
+            send_json(self, 400, {'error': f'JSON 解析失败: {e}'})
+            return
+
+        updates = body.get('updates') or {}
+        if not isinstance(updates, dict):
+            send_json(self, 400, {'error': 'updates 必须是对象'})
+            return
+
+        state_path = os.path.join(DATA_DIR, 'voice_closure_state.json')
+        state = {'updated_at': '', 'links': {}}
+        if os.path.exists(state_path):
+            with open(state_path, 'r', encoding='utf-8') as f:
+                state = json.load(f)
+        if 'links' not in state or not isinstance(state['links'], dict):
+            state['links'] = {}
+
+        allowed = {
+            'confirmed', 'needOutreach', 'outreachStatus',
+            'outreachNote', 'operator', 'updatedAt',
+        }
+        changed = 0
+        for link_id, patch in updates.items():
+            if not isinstance(patch, dict):
+                continue
+            row = state['links'].get(link_id, {})
+            for k, v in patch.items():
+                if k in allowed:
+                    row[k] = v
+            state['links'][link_id] = row
+            changed += 1
+
+        state['updated_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        with open(state_path, 'w', encoding='utf-8') as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+
+        send_json(self, 200, {
+            'ok': True,
+            'changed': changed,
+            'total': len(state['links']),
+            'updated_at': state['updated_at'],
         })
 
     def _handle_nps_rebuild(self):

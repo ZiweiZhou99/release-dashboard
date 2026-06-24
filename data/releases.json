@@ -1,33 +1,427 @@
 [
   {
-    "version": "2.70.4（小版本）",
+    "version": "2.74.0",
+    "model": "E2, E2H",
+    "date": "2026-07-20",
+    "type": "软件",
+    "pm": "",
+    "features": [
+      {
+        "name": "E2/E2H适配(暂定)",
+        "rd": "",
+        "qa": "",
+        "note": "",
+        "status": "—",
+        "jira": []
+      }
+    ],
+    "shimo": null
+  },
+  {
+    "version": "2.73.0",
+    "model": "S2、E1、S6",
+    "date": "2026-06-29",
+    "type": "软件",
+    "pm": "",
+    "features": [
+      {
+        "name": "S2语音助手",
+        "rd": "韩瑞祥",
+        "qa": "王雪",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "备考计划支持跨册次",
+        "rd": "荆薇  李业来  王建明",
+        "qa": "闫鸿  李佳新",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "试卷「名校专区」标签",
+        "rd": "操民康  李业来",
+        "qa": "王雪",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "作文批改渲染替换成 markwon",
+        "rd": "韩瑞祥",
+        "qa": "闫鸿",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "手写问题修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-35320",
+        "rd": "汤景",
+        "qa": "闫鸿",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "迷宫资源拆分",
+        "rd": "胡萍",
+        "qa": "王雪",
+        "note": "",
+        "status": "—",
+        "jira": []
+      }
+    ],
+    "shimo": null
+  },
+  {
+    "version": "2.72.0-1",
+    "model": "S2、E1、S6",
+    "date": "2026-06-16",
+    "type": "热更版本",
+    "pm": "",
+    "features": [
+      {
+        "name": "回滚：2.72.0修改的互动阅读听书相关功能；",
+        "rd": "操民康",
+        "qa": "闫鸿",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "FIX：PDF资料崩溃",
+        "rd": "操民康  邢春涛",
+        "qa": "闫鸿",
+        "note": "",
+        "status": "—",
+        "jira": []
+      }
+    ],
+    "shimo": null
+  },
+  {
+    "version": "2.72.0",
+    "model": "S2、E1、S6",
+    "date": "2026-06-15",
+    "type": "软件",
+    "pm": "",
+    "features": [
+      {
+        "name": "问题修复 - 材料中作答的题目订正",
+        "rd": "龙孔军",
+        "qa": "回测关注",
+        "note": "回测关注：小题需要在材料中作答小题订正时不写笔迹，材料中做对，订正结果能正确保存任意结构化练习都可以",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "崩溃修复3处",
+        "rd": "邢春涛",
+        "qa": "回测关注",
+        "note": "回测关注:阅读专区能够正常打开/翻页等拍照上传, 单页/多页, 能够正常上传且源文件能够看到完整文件, 云文件中打开无异常阅读专区: 抽卡弹窗正常展示,且抽卡时能够正常展示旋转动画;  首页右上角卡片点击后能够正常展示大开片弹窗",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "小猿电台问题修复",
+        "rd": "胡萍",
+        "qa": "李佳新",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "语文&英语作文批改高考管控",
+        "rd": "邢春涛",
+        "qa": "王雪",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "题目详情页替换成webview",
+        "rd": "@操民康",
+        "qa": "闫鸿",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "push版本升级",
+        "rd": "邢春涛",
+        "qa": "-",
+        "note": "回测关注: 能够正常接收推送即可, 可在家长管控场景下测note: 需要也同时看下学龄前的管控",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "ai答疑对话气泡内替换成 markwon渲染",
+        "rd": "韩瑞祥",
+        "qa": "-",
+        "note": "回测关注：正常线上能能渲染的格式这个应该也是兼容的，所以关注下拍照批改、拍照视频答疑等进入ai 对话的地方，其实可以主要只看一个地方就行，因为底层是一个东西",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "崩溃和oom修复",
+        "rd": "韩瑞祥",
+        "qa": "回测关注",
+        "note": "拍批题目详情页点踩相关逻辑；互动阅读听书相关功能；",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "修复诊断报告的问题",
+        "rd": "操民康",
+        "qa": "李佳新",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "文科备考",
+        "rd": "荆薇  龙孔军  邢春涛  李业来  谭坚铭  王建明",
+        "qa": "闫鸿  王雪",
+        "note": "",
+        "status": "—",
+        "jira": []
+      }
+    ],
+    "shimo": {
+      "date": "2026-06-15",
+      "raw_date": "2026.6.15",
+      "versions": [
+        "2.72.0"
+      ],
+      "features": [
+        {
+          "name": "AI精准复习-文科（备考）周子威",
+          "devices": "",
+          "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "覆盖范围：S6、S2电信版",
+          "devices": "",
+          "entry": "",
+          "detail_parts": [
+            {
+              "label": null,
+              "text": "文科备考 = 给小初语文、小学英语、初中英语，补上与理科同款的「AI 精准期末备考」能力 介绍PPT： 《学习机&学练机-软件产品功能上线预告》（64页开始）"
+            }
+          ]
+        },
+        {
+          "name": "复习流程：文科方案根据各科教研定义的复习模块依次进行",
+          "devices": "",
+          "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "小学语文 / 初中语文：基础知识夯实 → 诗文应用 → 阅读理解 → 写作表达",
+          "devices": "",
+          "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "小学英语：基础知识强化 → 技能突破",
+          "devices": "",
+          "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "初中英语：基础巩固 → 篇章强化 → 技能突破",
+          "devices": "",
+          "entry": "",
+          "detail_parts": [
+            {
+              "label": null,
+              "text": "学习资源：文科有三类复习资源--讲解视频、单词卡、pdf资料，点击即可练前回顾，学习后直接针对性练习"
+            }
+          ]
+        },
+        {
+          "name": "暑假计划周子威",
+          "devices": "S6、S2、E1",
+          "entry": "小初的【首页-暑假计划】、【教材同步练-暑假计划】、【专项-暑假计划】",
+          "detail_parts": []
+        },
+        {
+          "name": "支持学段学科：小学数语英、初中数语英物理化学",
+          "devices": "",
+          "entry": "",
+          "detail_parts": [
+            {
+              "label": "注意",
+              "text": "旧机型S1、A1仍保留旧寒假大作战"
+            },
+            {
+              "label": null,
+              "text": "详细介绍（71-76页） 《学习机&学练机-软件产品功能上线预告》 仅小学、入口在专项突破-第2页可见，内容存在差异，无个性化 注意上线时间：6.23上线【教材同步练-暑假计划】、【专项-暑假计划】入口，6.29上线【首页-暑假计划】入口"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "version": "2.71.5",
+    "model": "S2、E1、S6",
+    "date": "2026-05-25",
+    "type": "软件",
+    "pm": "",
+    "features": [
+      {
+        "name": "修复绘画本笔迹被截断问题Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-34625",
+        "rd": "邢春涛",
+        "qa": "闫鸿",
+        "note": "回测关注",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "口算多账号错题本同步",
+        "rd": "操民康  胡云灏",
+        "qa": "闫鸿",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "飞象登录流程改造",
+        "rd": "韩瑞祥  荆薇  李业来",
+        "qa": "闫鸿  王雪",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "拍批接入大模型",
+        "rd": "操民康  谭坚铭",
+        "qa": "李佳新",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "学龄前拆分-小猿电台",
+        "rd": "胡萍",
+        "qa": "李佳新",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "语音助手迁移至系统",
+        "rd": "韩瑞祥",
+        "qa": "李佳新",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "extension仓库独立包名(dev下, 线上无影响)",
+        "rd": "邢春涛",
+        "qa": "无需",
+        "note": "正常回测即可",
+        "status": "—",
+        "jira": []
+      }
+    ],
+    "shimo": null
+  },
+  {
+    "version": "2.70.4",
     "model": "E1",
     "date": "2026-05-11",
-    "type": "软件版本",
+    "type": "小版本",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.70.4（小版本）【机型】E1【日期】20260511",
     "features": [
       {
         "name": "修复互动题变大的问题",
         "rd": "胡萍",
         "qa": "李佳新",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
   },
   {
-    "version": "2.70.2",
-    "model": "S6、S2、E1",
+    "version": "2.70.1",
+    "model": "S2、E1、S6",
     "date": "2026-05-08",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.70.2【机型】S6、S2、E1【日期】20260508",
-    "features": [],
+    "features": [
+      {
+        "name": "学练侧优化--S6设备更换锁屏图片&修改「名师课」tab名称",
+        "rd": "Unknown User (shaobinfeng)  王建明",
+        "qa": "Unknown User (lishengjiao)",
+        "note": "回测时关注更改签名后锁屏显示（图片+签名）是否正常",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "统一学习机、学练机计算逻辑",
+        "rd": "龙孔军  冯健",
+        "qa": "李佳新",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "全学科诊断",
+        "rd": "龙孔军  Unknown User (shaobinfeng)  Unknown User (luomaobj)  Unknown User (cuixiaofeng)  王建明  胡萍  廉凯旋",
+        "qa": "李佳新  Unknown User (chenxuetong)  Unknown User (zhuodongxue)  闫鸿",
+        "note": "",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "推送AppId配置修改",
+        "rd": "邢春涛",
+        "qa": "无需测试",
+        "note": "没有修改逻辑, 仅更改push appId相关配置, 回测关注:学龄前app练习app以上app能够正常收到推送即可, 验一个场景即可(如:家长管控)",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "octopus日志通过frog上报",
+        "rd": "张川川",
+        "qa": "-",
+        "note": "修改日志上报方式，通过 switch 可以控制比例",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "2.69灰度问题修复",
+        "rd": "胡萍",
+        "qa": "Unknown User (lishengjiao)",
+        "note": "1.互动题偶现放大2.绘画本我的画册打开笔迹上移",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "拍批错题本题目详情页ai答疑加载异常",
+        "rd": "操民康",
+        "qa": "",
+        "note": "只影响错题本进入的题目详情",
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "自研点读轨迹不上报Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-34233",
+        "rd": "操民康",
+        "qa": "闫鸿",
+        "note": "只修改了自研点读，其他点读保持现状",
+        "status": "—",
+        "jira": []
+      }
+    ],
     "shimo": {
       "date": "2026-05-08",
       "raw_date": "2026.5.8",
@@ -36,35 +430,36 @@
       ],
       "features": [
         {
-          "name": "S6设备更换锁屏图片",
-          "devices": "S6",
+          "name": "S6设备更换锁屏图片周子威",
+          "devices": "",
+          "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "凸显好成绩与学练机练习的相关性",
+          "devices": "",
           "entry": "",
           "detail_parts": [
             {
               "label": null,
-              "text": "凸显好成绩与学练机练习的相关性；签名区域调整：相对上一版，调整签名区域（右下→居中）与大小（调大）；备注：当前需要用户更改签名后才会生效"
+              "text": "签名区域调整：相对上一版，调整签名区域（右下->居中）与大小（调大）"
             }
           ]
         },
         {
-          "name": "全学科诊断",
-          "devices": "S6",
-          "entry": "首页/AI工具箱-学情诊断；理科新增入口：教材同步-拍照诊断",
-          "detail_parts": [
-            {
-              "label": null,
-              "text": "新增文科诊断能力，推荐对应提升计划。支持用户了解自己全学科的学情，获得学习指导意见。此前诊断仅支持小初数、理、化，本次升级在学练机补充英语和语文拍照诊断能力，实现全学科「诊-学-练-测」。通过拍语文/英语试卷或作业，可以为用户生成诊断报告，了解本次拍照正确率情况、专项能力水平及年级平均能力水平对比。报告为学生提供学习提升建议，学习建议会自动加入首页的每日任务推荐。"
-            }
-          ]
-        },
-        {
-          "name": "新上线一批高质量课程",
-          "devices": "S6、S2、E1",
+          "name": "备注：当前需要用户更改签名后才会生效",
+          "devices": "",
           "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "全学科诊断周子威",
+          "devices": "",
+          "entry": "桌面“名师课”（原体系学）tab",
           "detail_parts": [
             {
               "label": null,
-              "text": "猿辅导校内王牌培优：适度拔高，分层培优，适合大多数孩子的培优方案；学科金牌专项：一科一策，专项突破，让弱项变强项，强项变绝招；重难点专训：分层突破重难考点，三步构建解题超能力"
+              "text": "新增文科诊断能力，推荐对应提升计划 支持用户了解自己全学科的学情，获得学习指导意见，此前诊断仅支持小初数、理、化，本次升级在学练机补充英语和语文拍照诊断能力，实现全学科「诊-学-练-测」 通过拍语文/英语试卷或作业，可以为用户生成诊断报告，了解本次拍照正确率情况，专项能力水平及年级平均能力水平对比，了解自己需要提升的能力 报告为学生提供学习提升建议，学习建议会自动加入首页的每日任务推荐"
             }
           ]
         }
@@ -72,105 +467,37 @@
     }
   },
   {
-    "version": "2.70.1",
-    "model": "S2、E1、S6",
-    "date": "2026-05-08",
-    "type": "软件版本",
-    "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.70.1【机型】S2、E1、S6【日期】20260508",
-    "features": [
-      {
-        "name": "学练侧优化--S6设备更换锁屏图片&修改「名师课」tab名称",
-        "rd": "邵滨峰 王建明",
-        "qa": "李声娇",
-        "note": "回测时关注 更改签名后锁屏显示（图片+签名）是否正常",
-        "jira": [],
-        "status": "✅"
-      },
-      {
-        "name": "统一学习机、学练机计算逻辑",
-        "rd": "龙孔军 冯健",
-        "qa": "李佳新",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "全学科诊断",
-        "rd": "龙孔军 邵滨峰 罗茂 崔晓峰 王建明 胡萍 廉凯旋",
-        "qa": "李佳新 陈学同 卓冬雪 闫鸿",
-        "note": "",
-        "jira": [],
-        "status": "✅"
-      }
-    ],
-    "shimo": null
-  },
-  {
-    "version": "2.70.0",
-    "model": "S6",
-    "date": "2026-05-08",
-    "type": "固件+软件版本",
-    "pm": "一起发",
-    "is_firmware": false,
-    "raw_title": "【固件+软件版本】2.70.0 【机型】S6【日期】20260508（和APP一起发）",
-    "features": [
-      {
-        "name": "正式环境",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "2.70.0",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      }
-    ],
-    "shimo": null
-  },
-  {
-    "version": "2.69.3（小版本",
+    "version": "2.69.3",
     "model": "S2、E1、S6",
     "date": "2026-04-21",
-    "type": "软件版本",
+    "type": "小版本",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.69.3（小版本）【机型】S2、E1、S6【日期】20260421",
     "features": [
       {
         "name": "修复0420热更版本偶现热更不生效问题",
         "rd": "胡萍",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
   },
   {
-    "version": "2.69.1-1（热更版本",
+    "version": "2.69.1-1",
     "model": "S2、E1、S6",
     "date": "2026-04-20",
-    "type": "软件版本",
+    "type": "热更版本",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.69.1-1（热更版本）【机型】S2、E1、S6【日期】20260420",
     "features": [
       {
         "name": "修复0414版本用户反馈--绘画本笔迹上移",
         "rd": "胡萍",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -179,108 +506,104 @@
     "version": "2.69.1",
     "model": "S2、E1、S6",
     "date": "2026-04-14",
-    "type": "软件版本",
-    "pm": "李声娇",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.69.1 【机型】S2、E1、S6、【日期】20260414 李声娇",
+    "type": "软件",
+    "pm": "",
     "features": [
       {
         "name": "崩溃问题修复",
         "rd": "韩瑞祥",
         "qa": "",
         "note": "线上崩溃问题修复，bugfix分支，回测关注",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "学练机push优化",
-        "rd": "邢春涛 崔晓峰 张川川",
-        "qa": "李声娇",
+        "rd": "邢春涛  Unknown User (cuixiaofeng)  张川川",
+        "qa": "Unknown User (lishengjiao)",
         "note": "账号切换, 登入登出等case",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "学龄前应用拆分",
-        "rd": "胡萍 张川川",
-        "qa": "李佳新 李声娇",
-        "note": "主要涉及学龄前大闯关及口算挑战 K12 loading样式，auto size适配，横竖屏切换",
-        "jira": [],
-        "status": "✅"
+        "rd": "胡萍  张川川",
+        "qa": "李佳新  Unknown User (lishengjiao)",
+        "note": "主要涉及学龄前大闯关及口算挑战K12 loading样式，auto size适配，横竖屏切换",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "试卷辅助生产",
-        "rd": "邵滨峰 邢春涛",
-        "qa": "陈学同",
+        "rd": "Unknown User (shaobinfeng)  邢春涛",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "学练机应用拆分 Permanent",
+        "name": "学练机应用拆分 Permanent",
         "rd": "张川川",
-        "qa": "卓冬雪",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "阶段测优化",
         "rd": "龙孔军",
-        "qa": "卓冬雪",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "学练机应用拆分升级",
-        "rd": "杜博 张川川 田韦华 董骞",
+        "rd": "Unknown User (dubo01)  张川川  田韦华  董骞",
         "qa": "闫鸿",
         "note": "涉及固件更新",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "优化教辅pdf图片练习图片存储方式",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33992优化教辅pdf图片练习图片存储方式",
         "rd": "操民康",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [
-          "MEGREZ-33992"
-        ],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "期中AI精准复习",
-        "rd": "张媛媛 王建明",
-        "qa": "陈学同",
+        "rd": "Unknown User (zhangyuanyuanbj02)  王建明",
+        "qa": "Unknown User (chenxuetong)",
         "note": "涉及内容：1. 首页banner位功能正常 2. 复习模考顶部banner展示正常 3. 复习模考进入报告页中-复习建议“模块展示正常",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "调整云文件同步轮询间隔从30分钟到60分钟",
         "rd": "韩瑞祥",
         "qa": "",
         "note": "云文件同步上传相关",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "首页版本更新相关同步调用改为异步调用",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "回测关注即可",
         "note": "2.67.0版本报了很多anr，很多case指向首页版本更新相关的远程调用，这部分调用线上是同步的，明显不合理，这次改成异步调用，辛苦测试回测的时候关注下这次的新版升级到+1版本是否正常（从首页底部的推送入口走升级）",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "frog耗时监控",
         "rd": "操民康",
         "qa": "研发自测",
         "note": "纯客户端改动",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -291,7 +614,7 @@
       ],
       "features": [
         {
-          "name": "AI精准复习-期中",
+          "name": "AI精准复习-期中周子威",
           "devices": "",
           "entry": "",
           "detail_parts": [
@@ -305,97 +628,51 @@
     }
   },
   {
-    "version": "2.68.0",
-    "model": "S2、E1、S6",
-    "date": "2026-04-13",
-    "type": "固件+软件版本",
-    "pm": "一起发",
-    "is_firmware": false,
-    "raw_title": "【固件+软件版本】2.68.0 【机型】S2、E1、S6【日期】20260413（和APP一起发）",
-    "features": [
-      {
-        "name": "正式环境",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "2.68.0",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "2.68.0",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "2.68.0",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      }
-    ],
-    "shimo": null
-  },
-  {
     "version": "2.67.0",
     "model": "S2、E1、S6、S1",
     "date": "2026-03-30",
-    "type": "软件版本",
-    "pm": "李佳新",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.67.0 【机型】S2、E1、S6、S1【日期】20260330 李佳新",
+    "type": "软件",
+    "pm": "",
     "features": [
       {
         "name": "修复北京人教电子书包无法打开伴学模式的问题",
         "rd": "邢春涛",
         "qa": "",
-        "note": "电子书包北京版点读无法触发导学助手，这个问题一直在线上存在问题，2025-9月份引入 回测关注: 电子书包 - 北京人教 - 是否可以正常打开办学模式 专项里北京人教可以正常使用(非办学)",
-        "jira": [],
-        "status": ""
+        "note": "电子书包北京版点读无法触发导学助手，这个问题一直在线上存在问题，2025-9月份引入回测关注:  电子书包 - 北京人教 - 是否可以正常打开办学模式专项里北京人教可以正常使用(非办学)",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "互动阅读zip打开失败修复: 问题",
         "rd": "邢春涛",
         "qa": "",
-        "note": "互动阅读笔迹文件zip可能损坏,导致后续操作有问题, 此次添加兜底功能: 删除损坏的文件并重新创建, 回测关注: 互动阅读可以正常存储笔迹, 阅读进度等即可",
-        "jira": [],
-        "status": ""
+        "note": "互动阅读笔迹文件zip可能损坏,导致后续操作有问题, 此次添加兜底功能: 删除损坏的文件并重新创建, 回测关注: 互动阅读可以正常存储笔迹, 阅读进度等即可",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "举一反三更改为实时请求",
-        "rd": "邵滨峰 胡云灏",
+        "rd": "Unknown User (shaobinfeng)  胡云灏",
         "qa": "李佳新",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "英语作文批改",
-        "rd": "张媛媛 韩瑞祥",
-        "qa": "陈学同",
+        "rd": "Unknown User (zhangyuanyuanbj02)  韩瑞祥",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "拍批详情崩溃修复 & h5 视频播放失败兜底",
         "rd": "韩瑞祥",
         "qa": "",
-        "note": "-bugfix分支修复 -回测时看下拍批详情页多tab切换 & 视频播放是否正常（videoid超长）",
-        "jira": [],
-        "status": ""
+        "note": "-bugfix分支修复-回测时看下拍批详情页多tab切换 & 视频播放是否正常（videoid超长）",
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -406,7 +683,7 @@
       ],
       "features": [
         {
-          "name": "英语作文批改",
+          "name": "支持英语作文批改周子威",
           "devices": "S6、S2、E1",
           "entry": "AI智慧辅导-英语作文批改",
           "detail_parts": [
@@ -417,7 +694,7 @@
           ]
         },
         {
-          "name": "单元真题测优化",
+          "name": "单元真题测优化周子威",
           "devices": "S6、S2、E1（非跟版，直接上线） S1（跟版，灰度后上线）",
           "entry": "",
           "detail_parts": [
@@ -434,140 +711,88 @@
     "version": "2.66.1",
     "model": "S2、E1、S6",
     "date": "2026-03-11",
-    "type": "软件版本",
-    "pm": "卓冬雪",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.66.1 【机型】S2、E1、S6【日期】20260311 卓冬雪",
+    "type": "软件",
+    "pm": "",
     "features": [
       {
         "name": "拍批相关详情页webview化",
-        "rd": "韩瑞祥 徐永林",
-        "qa": "李声娇",
+        "rd": "韩瑞祥  徐永林",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "错题本按日期选中不了所有错题的问题修复",
-        "rd": "邵滨峰",
-        "qa": "卓冬雪",
+        "rd": "Unknown User (shaobinfeng)",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "绘本跟读结果页出现时机问题修复",
-        "rd": "张媛媛",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "不需要测试",
-        "note": "-bugfix分支修复 -回测时验证下 -",
-        "jira": [
-          "MEGREZX-7539"
-        ],
-        "status": ""
+        "note": "-bugfix分支修复-回测时验证下-Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZX-7539",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "人教缓存优化",
-        "rd": "张媛媛",
-        "qa": "陈学同",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "单元真题测",
         "rd": "龙孔军",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "flavor彩色资源打包替换",
         "rd": "汤景",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "技术需求，更新了Kuiper版本",
-        "jira": [
-          "MEGREZ-33453"
-        ],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "frog公参修复",
         "rd": "操民康",
         "qa": "刘妙玉",
         "note": "bugfix分支修复，只影响frog",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "线上子线程npe修复",
         "rd": "胡萍",
         "qa": "不需要测试",
-        "note": "-bugfix分支修复 -回测时验证下（多孩账号切换孩子，看云文件是否正常）",
-        "jira": [],
-        "status": ""
+        "note": "-bugfix分支修复-回测时验证下（多孩账号切换孩子，看云文件是否正常）",
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "首页ANR",
+        "name": "首页ANRJira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33387",
         "rd": "龙孔军",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-33387"
-        ],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "英语点读进程年级学期未同步bug 修复",
         "rd": "张川川",
         "qa": "-",
-        "note": "切换年级或者学期以后，英语点读的请求对应的年级学期未发生变化。 已修复，回测时可以验证。",
-        "jira": [],
-        "status": "✅"
-      }
-    ],
-    "shimo": null
-  },
-  {
-    "version": "2.65.2",
-    "model": "S2、E1、S6",
-    "date": "2026-03-11",
-    "type": "固件+软件版本",
-    "pm": "一起发",
-    "is_firmware": false,
-    "raw_title": "【固件+软件版本】2.65.2 【机型】S2、E1、S6【日期】20260311（和APP一起发）",
-    "features": [
-      {
-        "name": "正式环境",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "2.65.2",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "2.65.2",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
-      },
-      {
-        "name": "2.65.2",
-        "rd": "",
-        "qa": "",
-        "note": "",
-        "jira": [],
-        "status": ""
+        "note": "切换年级或者学期以后，英语点读的请求对应的年级学期未发生变化。已修复，回测时可以验证。",
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -578,7 +803,7 @@
       ],
       "features": [
         {
-          "name": "单元真题测",
+          "name": "单元真题测周子威",
           "devices": "S6",
           "entry": "教材同步-每个单元的课时末尾",
           "detail_parts": [
@@ -593,7 +818,7 @@
           ]
         },
         {
-          "name": "牛津阅读树-部分绘本下线",
+          "name": "牛津阅读树-部分绘本下线孟玉陈",
           "devices": "S6、S2、E1、S1、A1",
           "entry": "小学-专项突破-英语分级阅读  学龄前-首页-英语分级阅读（仅E1有）",
           "detail_parts": [
@@ -618,50 +843,48 @@
     "version": "2.65.0",
     "model": "S2、E1、S6",
     "date": "2026-02-03",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.65.0 【机型】S2、E1、S6【日期】20260203",
     "features": [
       {
         "name": "练习反馈征询",
-        "rd": "龙孔军 李业来",
-        "qa": "李声娇",
+        "rd": "龙孔军  李业来",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "2xx,4xx,6xx相关题目拍批结果页展示优化",
         "rd": "宋志阳",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "简单回测 PDF 试卷和纯 PDF 教辅结果页和单题详情页上面题目展示",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "错题本分页优化",
-        "rd": "邵滨峰 胡云灏",
-        "qa": "卓冬雪",
+        "rd": "Unknown User (shaobinfeng)  胡云灏",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "-ai助手外显",
-        "rd": "操民康 胡萍 吴先坤",
+        "rd": "操民康  胡萍  吴先坤",
         "qa": "李佳新",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "lua 通用参数去除 ping 排序策略去除 User信息添加缓存",
+        "name": "lua 通用参数去除ping 排序策略去除User信息添加缓存",
         "rd": "张川川",
         "qa": "-",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -672,7 +895,7 @@
       ],
       "features": [
         {
-          "name": "AI语音助手优化",
+          "name": "AI语音助手优化张恒志",
           "devices": "S6",
           "entry": "桌面左上角小猿图标",
           "detail_parts": [
@@ -700,87 +923,88 @@
     "version": "2.64.11",
     "model": "S2、E1、S6",
     "date": "2026-01-19",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.64.11 【机型】S2、E1、S6【日期】20260119",
     "features": [
       {
         "name": "寒假规划",
-        "rd": "邵滨峰 李业来",
-        "qa": "李佳新 陈学同",
+        "rd": "Unknown User (shaobinfeng)  李业来",
+        "qa": "李佳新  Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "听写中断无法恢复",
         "rd": "龙孔军",
-        "qa": "卓冬雪",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "电子书包优化",
-        "rd": "张媛媛 罗茂",
+        "rd": "Unknown User (zhangyuanyuanbj02)  Unknown User (luomaobj)",
         "qa": "闫鸿",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "反应慢优化+刷新模式设置",
         "rd": "龙孔军",
         "qa": "闫鸿",
         "note": "刷新模式依赖固件",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "修复文件信息回捞失效 & 新增修改日志",
         "rd": "韩瑞祥",
         "qa": "无",
         "note": "bugfix，主流程回测就行",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "离线日志耗时优化",
-        "rd": "杜博",
+        "rd": "Unknown User (dubo01)",
         "qa": "-",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "作文辅导文案调整",
+        "name": "作文辅导文案调整Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33225",
         "rd": "邢春涛",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [
-          "MEGREZ-33225"
-        ],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "frog增加entrance和newFunctionId",
         "rd": "操民康",
         "qa": "",
         "note": "数据验收",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "laterbug修复",
-        "rd": "操民康",
-        "qa": "卓冬雪",
+        "name": "回测问题修复（退出登陆账号信息变为未登陆）Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33066",
+        "rd": "龙孔军",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [
-          "MEGREZ-33051",
-          "MEGREZ-31567"
-        ],
-        "status": "✅"
+        "status": "—",
+        "jira": []
+      },
+      {
+        "name": "laterbug修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33051Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31567",
+        "rd": "操民康",
+        "qa": "Unknown User (zhuodongxue)",
+        "note": "",
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -791,9 +1015,15 @@
       ],
       "features": [
         {
-          "name": "寒假计划",
+          "name": "寒假计划孟玉陈",
           "devices": "S6、S2、E1",
           "entry": "小初的【首页-寒假计划】、【教材同步练-寒假计划】、【专项-寒假计划】",
+          "detail_parts": []
+        },
+        {
+          "name": "支持学段学科：小学数语英、初中数语英物理化学",
+          "devices": "",
+          "entry": "",
           "detail_parts": [
             {
               "label": "注意",
@@ -801,12 +1031,12 @@
             },
             {
               "label": null,
-              "text": "支持学段学科：小学数语英、初中数语英物理化学 详细介绍（20-25页） 仅小学、入口在专项突破-第2页可见，内容存在差异，无个性化"
+              "text": "详细介绍（20-25页） 仅小学、入口在专项突破-第2页可见，内容存在差异，无个性化"
             }
           ]
         },
         {
-          "name": "电子书包优化",
+          "name": "电子书包优化孟玉陈",
           "devices": "S6、S2、E1",
           "entry": "首页电子书包",
           "detail_parts": [
@@ -817,7 +1047,7 @@
           ]
         },
         {
-          "name": "首页功能切换提速",
+          "name": "首页功能切换提速周子威",
           "devices": "S6、S2",
           "entry": "设置-更多设置-首页刷新模式",
           "detail_parts": [
@@ -834,18 +1064,16 @@
     "version": "2.63.11",
     "model": "S2、E1、S6",
     "date": "2026-01-07",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.63.11 【机型】S2、E1、S6【日期】20260107",
     "features": [
       {
         "name": "frog 耗时优化",
         "rd": "操民康",
-        "qa": "卓冬雪",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -854,58 +1082,48 @@
     "version": "2.63.0",
     "model": "S2、E1、S6",
     "date": "2026-01-05",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.63.0 【机型】S2、E1、S6【日期】20260105",
     "features": [
       {
         "name": "个性化备考",
-        "rd": "崔晓峰 罗茂 王建明 何雷 唐培根 胡萍 龙孔军 张媛媛 操民康",
-        "qa": "李声娇 卓冬雪 李佳新 陈学同",
+        "rd": "Unknown User (cuixiaofeng)  罗茂  王建明  何雷  唐培根  胡萍  龙孔军  Unknown User (zhangyuanyuanbj02)  操民康",
+        "qa": "Unknown User (lishengjiao)  Unknown User (zhuodongxue)  李佳新  Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "NetworkExceptionReport中重复的网络成功日志改为v类",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "-",
         "note": "无需测试，走正常回测即可，在问题修复分支中，会一起合入",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "网络请求通用参数中加入did",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "-",
         "note": "无需测试，走正常回测即可，在问题修复分支中，会一起合入",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "家长管控接入push",
-        "rd": "邢春涛 胡萍",
-        "qa": "李声娇",
+        "rd": "邢春涛  胡萍",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
-      },
-      {
-        "name": "备用域名策略优化：支持httpdns，支持域名 ping 嗅探排序",
-        "rd": "张川川",
-        "qa": "-",
-        "note": "研发自测，QA 关注测试网络请求情况是否异常 有switch 配置控制支持。",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "通用练习 - 未作答优化",
-        "rd": "龙孔军 廉凯旋",
+        "rd": "龙孔军  廉凯旋",
         "qa": "-",
-        "note": "回测关注：题目未作答正常批改/提交 在bugfix分支",
-        "jira": [],
-        "status": ""
+        "note": "回测关注：题目未作答正常批改/提交在bugfix分支",
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -914,7 +1132,7 @@
       "versions": [],
       "features": [
         {
-          "name": "AI精准复习",
+          "name": "AI精准复习周子威",
           "devices": "",
           "entry": "",
           "detail_parts": [
@@ -931,45 +1149,40 @@
     "version": "2.62.2",
     "model": "S6、S1",
     "date": "2025-12-16",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.62.2 【机型】S6、S1【日期】20251216",
     "features": [
       {
         "name": "同步练升级",
-        "rd": "龙孔军 胡萍 王建明 罗茂 谭坚铭 廉凯旋",
-        "qa": "卓冬雪 陈学同",
+        "rd": "龙孔军  胡萍  王建明  Unknown User (luomaobj)  谭坚铭  廉凯旋",
+        "qa": "Unknown User (zhuodongxue)  Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "拍照识万物",
-        "rd": "邵滨峰",
-        "qa": "李声娇",
+        "rd": "Unknown User (shaobinfeng)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "不跟本次发版，本期合入了代码，回测时设备不展示入口即可",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "线上问题修复",
+        "name": "线上问题修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-32650Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-32479",
         "rd": "龙孔军",
         "qa": "李佳新",
         "note": "",
-        "jira": [
-          "MEGREZ-32650",
-          "MEGREZ-32479"
-        ],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "新frog中的clog日志去除",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "",
         "note": "无需测试，走正常回测即可，在问题修复分支中，会一起合入",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -978,7 +1191,19 @@
       "versions": [],
       "features": [
         {
-          "name": "家长端优优老师",
+          "name": "同步练崔光映",
+          "devices": "",
+          "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "超级小猿崔光映--非12.16版本升级后功能，机器已经自带，视频做演示之用",
+          "devices": "",
+          "entry": "",
+          "detail_parts": []
+        },
+        {
+          "name": "家长端优优老师孟玉陈",
           "devices": "绑定S6系列的家长端APP",
           "entry": "S6的APP金刚位",
           "detail_parts": [
@@ -995,34 +1220,32 @@
     "version": "2.61.4",
     "model": "S2、E1",
     "date": "2025-12-08",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.61.4 【机型】S2、E1、【日期】20251208",
     "features": [
       {
         "name": "人教点读frog偶现崩溃修复",
         "rd": "操民康",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "阅读专区图书删除偶现崩溃修复",
         "rd": "操民康",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "激励弹窗无法关闭",
         "rd": "龙孔军",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -1031,18 +1254,16 @@
     "version": "2.61.2",
     "model": "S2、E1",
     "date": "2025-12-05",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.61.2 【机型】S2、E1【日期】20251205",
     "features": [
       {
         "name": "下掉L.d 日志",
         "rd": "宋志阳",
-        "qa": "闫鸿 卓冬雪",
+        "qa": "闫鸿  Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -1051,172 +1272,160 @@
     "version": "2.61.0",
     "model": "S2、E1、S6",
     "date": "2025-12-04",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.61.0 【机型】S2、E1、S6【日期】20251204",
     "features": [
       {
         "name": "图书删除",
-        "rd": "张媛媛",
-        "qa": "陈学同",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "回测关注 支持图书删除 弹窗 的展示消失时机，和产品确认修改，在进入到二级时弹窗不关闭",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "首页弹窗管理",
         "rd": "龙孔军",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "播放器cdn优化",
-        "rd": "张媛媛",
-        "qa": "陈学同",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "互动阅读下载优化",
-        "rd": "",
-        "qa": "陈学同",
+        "rd": "Unknown User (lilanyue)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "学练机合规优化",
         "rd": "韩瑞祥",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "修复阶段测评云文件部分练习尺寸过小的问题",
         "rd": "操民康",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "正常回测",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "S6小猿支持点击形象结束对话",
         "rd": "胡萍",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "查词风控降本",
-        "rd": "张媛媛",
-        "qa": "李声娇",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "solar-activity服务清理",
-        "rd": "张媛媛",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "",
         "note": "回测关注人工客服入口",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "日志回捞",
-        "rd": "杜博",
+        "rd": "Unknown User (dubo01)",
         "qa": "",
         "note": "研发测试",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "push",
         "rd": "邢春涛",
         "qa": "",
-        "note": "push研发测试 回测关注家长管控相关是否正正常 原计划本次会带上[家长管控接推送] 需求, 但是最终没带上, 代码是修改后回退的, 理论上不会有影响, 回测辛苦关注这部分",
-        "jira": [],
-        "status": "✅"
+        "note": "push研发测试回测关注家长管控相关是否正正常原计划本次会带上[家长管控接推送] 需求, 但是最终没带上, 代码是修改后回退的, 理论上不会有影响, 回测辛苦关注这部分",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "日志优化",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "",
         "note": "日志降本优化，正常回测即可",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "接口字段规范整改",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "",
         "note": "正常回测即可",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "互动阅读封面大图优化",
-        "rd": "张媛媛",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "",
-        "note": "正常回测即可  （bugfix分支）",
-        "jira": [
-          "MEGREZ-32152"
-        ],
-        "status": ""
+        "note": "正常回测即可Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-32152（bugfix分支）",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "跟读和绘本增加日志",
-        "rd": "张媛媛",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "",
-        "note": "（bugfix分支）",
-        "jira": [
-          "MEGREZ-32061"
-        ],
-        "status": ""
+        "note": "（bugfix分支）Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-32061",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "绘本封面适配问题修复",
-        "rd": "张媛媛",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "",
-        "note": "绘本封面图展示正常  （bugfix分支）",
-        "jira": [
-          "MEGREZ-32099"
-        ],
-        "status": ""
+        "note": "绘本封面图展示正常Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-32099（bugfix分支）",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "查词翻译启动模式优化",
-        "rd": "张媛媛",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "",
-        "note": "回测关注查词翻译首页正常  （bugfix分支）",
-        "jira": [
-          "MEGREZ-31910"
-        ],
-        "status": ""
+        "note": "回测关注查词翻译首页正常Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31910（bugfix分支）",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "绘本支持AI规则化",
         "rd": "胡萍",
-        "qa": "卓冬雪",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "frog重构",
         "rd": "操民康",
-        "qa": "卓冬雪",
-        "note": "正常回测",
-        "jira": [
-          "MEGREZ-31895"
-        ],
-        "status": "✅"
+        "qa": "Unknown User (zhuodongxue)",
+        "note": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31895正常回测",
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -1227,7 +1436,7 @@
       ],
       "features": [
         {
-          "name": "图书删除",
+          "name": "图书删除周子威",
           "devices": "",
           "entry": "",
           "detail_parts": [
@@ -1248,84 +1457,80 @@
     "version": "2.60.0",
     "model": "S2、E1、S6",
     "date": "2025-11-04",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.60.0 【机型】S2、E1、S6【日期】20251104",
     "features": [
       {
         "name": "试卷分析外化",
-        "rd": "张媛媛 邵滨峰 谭坚铭 田韦华 唐培根 崔晓峰",
-        "qa": "李佳新 卓冬雪 闫鸿",
+        "rd": "Unknown User (zhangyuanyuanbj02)  Unknown User (shaobinfeng)  谭坚铭  田韦华  唐培根  Unknown User (yintianbo)  Unknown User (cuixiaofeng)",
+        "qa": "李佳新  Unknown User (zhuodongxue)  闫鸿",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "人教SDK升级",
-        "rd": "",
-        "qa": "李声娇",
+        "rd": "Unknown User (zhangyuanyuanbj05)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "S6小猴支持点击",
         "rd": "胡萍",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "Oss直连优化",
-        "rd": "龙孔军 王建明",
-        "qa": "卓冬雪",
+        "rd": "龙孔军  王建明",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "作文点评修复",
+        "name": "作文点评修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31823",
         "rd": "韩瑞祥",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "fixbug分支",
-        "jira": [
-          "MEGREZ-31823"
-        ],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "播放器SDK升级",
-        "rd": "张媛媛",
-        "qa": "陈学同",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "云文件二期",
-        "rd": "",
-        "qa": "陈学同",
+        "rd": "Unknown User (lilanyue)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       },
       {
         "name": "AI底层修改(学习机 & 助手二期 & 日志)",
         "rd": "邢春涛",
         "qa": "",
-        "note": "回测关注 AI相关场景能够正常问答即可(多轮问答&历史消息正确)",
-        "jira": [],
-        "status": "✅"
+        "note": "回测关注AI相关场景能够正常问答即可(多轮问答&历史消息正确)",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "S6语音助手二期",
-        "rd": "季颖达",
-        "qa": "闫鸿 李佳新",
+        "rd": "Unknown User (lilanyue)  季颖达",
+        "qa": "闫鸿  李佳新",
         "note": "",
-        "jira": [],
-        "status": "✅"
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -1336,20 +1541,32 @@
       ],
       "features": [
         {
-          "name": "AI试卷分析",
+          "name": "AI试卷分析孟玉陈",
           "devices": "S2、E1系列",
           "entry": "小初的【首页-AI试卷分析】、【AI智慧辅导-学情诊断-试卷分析】",
+          "detail_parts": []
+        },
+        {
+          "name": "支持学段学科：小学、初中的数学学科",
+          "devices": "",
+          "entry": "",
           "detail_parts": [
             {
               "label": null,
-              "text": "支持学段学科：小学、初中的数学学科 用户拍照上传数学考试试卷，可生成专属诊断报告——解读考情学情助力高效提分 与原学情诊断的差异 原学情诊断：呈现基础的作业正确率、以及知识点的掌握情况，同时更新学习建议；练得差考得差——薄弱攻坚；练得差考得好——潜能爆发"
+              "text": "用户拍照上传数学考试试卷，可生成专属诊断报告——解读考情学情助力高效提分 与原学情诊断的差异 原学情诊断：呈现基础的作业正确率、以及知识点的掌握情况，同时更新学习建议 该试卷分析：强调将考试表现与用户日常的练习结合分析，对比用户课时维度练习的掌握情况和考试的具体表现，同时对异常丢分原因进行分析诊断，指向更精准、更高效的练习"
             }
           ]
         },
         {
-          "name": "英文分级绘本上新",
+          "name": "英文分级绘本上新孟玉陈",
           "devices": "全部学练机机型",
           "entry": "小学-专项突破-英语分级阅读  学龄前-首页-英语分级（仅E1有）",
+          "detail_parts": []
+        },
+        {
+          "name": "教辅上新：孟玉陈",
+          "devices": "",
+          "entry": "",
           "detail_parts": []
         }
       ]
@@ -1359,256 +1576,224 @@
     "version": "2.59.0",
     "model": "S2、E1",
     "date": "2025-10-14",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.59.0【机型】S2、E1 【日期】20251014",
     "features": [
       {
         "name": "ai 对话回复流式渲染性能优化",
         "rd": "韩瑞祥",
         "qa": "闫鸿",
-        "note": "回测关注： ai 对话场景比如作文辅导需要关注 ai 回复流式渲染是否正常，对输出中 loading进行了优化，还有内容输出进行节流（500ms） bugfix 分支",
-        "jira": [
-          "MEGREZ-30740"
-        ],
-        "status": ""
+        "note": "回测关注：ai 对话场景比如作文辅导需要关注 ai 回复流式渲染是否正常，对输出中 loading进行了优化，还有内容输出进行节流（500ms）bugfix 分支",
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "later bug： 对话流程中 用户语音输入时 网络断开或者弱网环境 下交互异常",
-        "rd": "邵滨峰",
+        "name": "later bug：对话流程中 用户语音输入时 网络断开或者弱网环境 下交互异常",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "闫鸿",
         "note": "在9.22bugfix分支",
-        "jira": [
-          "MEGREZ-24369"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "通用练习翻页优化",
         "rd": "龙孔军",
         "qa": "闫鸿",
         "note": "09-22 bugfix分支",
-        "jira": [
-          "MEGREZ-31071"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "later bug：S2同步到E1的教辅解析页缩放问题处理 [JIRA:MEGREZ-31224]",
-        "rd": "邵滨峰",
+        "name": "later bug：S2同步到E1的教辅解析页缩放问题处理Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31224",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "闫鸿",
         "note": "在9.22bugfix分支",
-        "jira": [
-          "MEGREZ-31224"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "一些内存泄漏问题处理",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "",
-        "note": "在9.22bugfix分支 正常回测就行",
-        "jira": [],
-        "status": ""
+        "note": "在9.22bugfix分支正常回测就行",
+        "status": "—",
+        "jira": []
       },
       {
         "name": "拍批题干答案隐藏",
         "rd": "操民康",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "海尼曼音频laterbug [JIRA:MEGREZ-31058]",
+        "name": "海尼曼音频laterbugJira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31058",
         "rd": "龙孔军",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "09-22 bugfix分支",
-        "jira": [
-          "MEGREZ-31058"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "图书清理",
         "rd": "邢春涛",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "海尼曼二期通用活动",
-        "rd": "张媛媛",
-        "qa": "陈学同",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "kuiper2.0路由改造 [JIRA:MEGREZ-31315]",
-        "rd": "邵滨峰",
-        "qa": "陈学同",
+        "name": "kuiper2.0路由改造Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31315",
+        "rd": "Unknown User (shaobinfeng)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [
-          "MEGREZ-31315"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "拍搜服务渲染出大图时app展示崩溃问题修复 [JIRA:MEGREZ-31370]",
-        "rd": "邵滨峰",
-        "qa": "陈学同",
+        "name": "拍搜服务渲染出大图时app展示崩溃问题修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31370",
+        "rd": "Unknown User (shaobinfeng)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [
-          "MEGREZ-31370"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "later bug： 数独页面查看提示交互问题修复",
-        "rd": "邵滨峰",
+        "name": "later bug：数独页面查看提示交互问题修复",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "闫鸿",
         "note": "在9.22bugfix分支",
-        "jira": [
-          "MEGREZ-20395"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "查字典查询同一个单词不请求查询接口，使用本地缓存优化 [JIRA:MEGREZ-30974]",
+        "name": "查字典查询同一个单词不请求查询接口，使用本地缓存优化Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30974",
         "rd": "韩瑞祥",
         "qa": "闫鸿",
-        "note": "只用线上回测就可以，需要关注查字典、取词翻译查字典查询相同单词功能正常 bugfix分支",
-        "jira": [
-          "MEGREZ-30974"
-        ],
-        "status": ""
+        "note": "只用线上回测就可以，需要关注查字典、取词翻译查字典查询相同单词功能正常bugfix分支",
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "系统返回栏按钮显示优化 [JIRA:MEGREZ-30944]",
+        "name": "系统返回栏按钮显示优化Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30944",
         "rd": "韩瑞祥",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-30944"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "绘画本翻页优化 [JIRA:MEGREZ-31078]",
+        "name": "绘画本翻页优化Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31078",
         "rd": "韩瑞祥",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-31078"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "京教点读页码异常 [JIRA:MEGREZ-31026]",
-        "rd": "张媛媛",
+        "name": "京教点读页码异常Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31026",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-31026"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "材料中作答批改方案优化",
-        "rd": "龙孔军 冯健 廉凯旋",
+        "rd": "龙孔军  冯健  廉凯旋",
         "qa": "闫鸿",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "人教SDK更新&预加载",
-        "rd": "张媛媛",
-        "qa": "李声娇",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "自研点读排版优化",
-        "rd": "张媛媛",
-        "qa": "李声娇",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "自研点读兜底页修复 [JIRA:MEGREZ-31362]",
-        "rd": "张媛媛",
-        "qa": "李声娇",
+        "name": "自研点读兜底页修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31362",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [
-          "MEGREZ-31362"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "题目来源优化",
         "rd": "龙孔军",
-        "qa": "卓冬雪",
+        "qa": "Unknown User (zhuodongxue)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "存储空间统计",
-        "rd": "",
+        "rd": "Unknown User (lilanyue)",
         "qa": "",
         "note": "技术需求，正常使用。",
-        "jira": [
-          "MEGREZ-30741"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "点读进程内存泄露优化 [JIRA:MEGREZ-30474]",
-        "rd": "",
+        "name": "点读进程内存泄露优化Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30474",
+        "rd": "Unknown User (lilanyue)",
         "qa": "",
         "note": "添加了人教点读进程的自动重启，进入人教点读页面 20 次后退出会重启进程，人教点读正常使用即可。",
-        "jira": [
-          "MEGREZ-30474"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "s3 2.58.0 版本代码合入",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "",
         "note": "2.58.0版本只发了s3，其他设备需要跟这个版本走完整回测流程，s3的新增功能也需要回测下",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "lua性能埋点",
         "rd": "胡萍",
         "qa": "",
         "note": "埋点需求，正常使用",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "关灯实验下线",
         "rd": "胡萍",
         "qa": "",
         "note": "正常使用",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "家长管控问题工单 https://work-order.zhenguanyu.com/#/znyj/ticket/detail/11309148",
+        "name": "家长管控问题工单https://work-order.zhenguanyu.com/#/znyj/ticket/detail/11309148",
         "rd": "胡萍",
         "qa": "",
         "note": "回测电台家长管控",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -1617,42 +1802,40 @@
     "version": "2.57.6",
     "model": "S2、E1、S1、A1",
     "date": "2025-09-16",
-    "type": "软件小版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件小版本】2.57.6【机型】S2、E1、S1、A1【日期】20250916",
     "features": [
       {
         "name": "京教跟读问题修复",
-        "rd": "张媛媛",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "闫鸿",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "kuiper2.0-英语单词听写掌握开关失效问题修复",
         "rd": "汤景",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "影响单词选择页面，需要看看进入练习后单词数量是否符合预期",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "首页定时任务优化",
         "rd": "宋志阳",
         "qa": "",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "kuiper2.0-升级弹窗问题修复",
         "rd": "汤景",
         "qa": "闫鸿",
         "note": "自动升级弹窗加了兜底文案，修改路由传参方式",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -1661,18 +1844,16 @@
     "version": "2.57.4",
     "model": "S2、E1、S1、A1",
     "date": "2025-09-12",
-    "type": "软件小版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件小版本】2.57.4【机型】S2、E1、S1、A1 【日期】20250912",
     "features": [
       {
         "name": "自研点读场景下编解码错误导致崩溃",
         "rd": "汤景",
         "qa": "闫鸿",
-        "note": "问题1： 跳转自研点读页崩溃 （九年级上-冀教版-教材同步 - Unit1） 问题2： 自研点读跟读也跳转结果页崩溃 （五年级上-苏教译林版-Unit1",
-        "jira": [],
-        "status": ""
+        "note": "问题1：跳转自研点读页崩溃（九年级上-冀教版-教材同步 - Unit1）问题2：自研点读跟读也跳转结果页崩溃（五年级上-苏教译林版-Unit1",
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -1681,68 +1862,56 @@
     "version": "2.57.2",
     "model": "",
     "date": "2025-09-08",
-    "type": "软件版本",
+    "type": "软件",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.57.2 【日期】20250908",
     "features": [
       {
-        "name": "[JIRA:MEGREZ-27465]",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-27465",
         "rd": "龙孔军",
         "qa": "李佳新",
         "note": "",
-        "jira": [
-          "MEGREZ-27465"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "[JIRA:MEGREZ-23684]",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-23684",
         "rd": "龙孔军",
         "qa": "李佳新",
         "note": "",
-        "jira": [
-          "MEGREZ-23684"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "[JIRA:MEGREZ-30895]",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30895",
         "rd": "龙孔军",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-30895"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "[JIRA:MEGREZ-21211]",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-21211",
         "rd": "龙孔军",
         "qa": "李佳新",
         "note": "",
-        "jira": [
-          "MEGREZ-21211"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "[JIRA:MEGREZ-30241]",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30241",
         "rd": "龙孔军",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-30241"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "升级Kuiper2.0",
         "rd": "汤景",
         "qa": "@all",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -1751,149 +1920,128 @@
     "version": "2.56.0",
     "model": "",
     "date": "2025-08-21",
-    "type": "软件版本",
-    "pm": "人教 升级报错 较多 暂停灰度 版本回退 重新发布",
-    "is_firmware": false,
-    "raw_title": "【软件版本】2.56.0 【日期】20250821（人教sdk升级报错较多，暂停灰度，sdk版本回退重新发布2.56.2）",
+    "type": "软件",
+    "pm": "",
     "features": [
       {
-        "name": "家长管控轮询任务优化 [JIRA:MEGREZ-30671]",
+        "name": "家长管控轮询任务优化Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30671",
         "rd": "宋志阳",
         "qa": "闫鸿",
         "note": "回测关注，轮询时间 10min → 60min，家长管控页面增加配置刷新接口",
-        "jira": [
-          "MEGREZ-30671"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "互动阅读横屏 ai 伴读返回按钮丢失 [JIRA:MEGREZ-30765]",
+        "name": "互动阅读横屏 ai 伴读返回按钮丢失 Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30765",
         "rd": "韩瑞祥",
         "qa": "李佳新",
-        "note": "回测关注： 互动阅读-横屏- AI伴读弹窗顶部的返回按钮，可以正常返回",
-        "jira": [
-          "MEGREZ-30765"
-        ],
-        "status": ""
+        "note": "回测关注：互动阅读-横屏- AI伴读弹窗顶部的返回按钮，可以正常返回",
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "[JIRA:MEGREZ-30711] 自研点读翻页超限报错",
-        "rd": "张媛媛",
-        "qa": "陈学同",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30711自研点读翻页超限报错",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [
-          "MEGREZ-30711"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "互动题版本更新 [JIRA:MEGREZ-30585]",
+        "name": "互动题版本更新Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30585",
         "rd": "胡萍",
         "qa": "祁海鹏",
-        "note": "已提测，回测也需要关注 互动题版本：entrance 28， component 40，template 76",
-        "jira": [
-          "MEGREZ-30585"
-        ],
-        "status": ""
+        "note": "已提测，回测也需要关注互动题版本：entrance 28，component 40，template 76",
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "[JIRA:MEGREZ-25648]",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-25648",
         "rd": "胡萍",
         "qa": "祁海鹏",
         "note": "已提测，回测也需要关注",
-        "jira": [
-          "MEGREZ-25648"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "[JIRA:MEGREZ-30499]",
+        "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30499",
         "rd": "龙孔军",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-30515",
-          "MEGREZ-30499"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "课程聚合",
-        "rd": "邵滨峰 胡萍 韩瑞祥 操民康",
-        "qa": "闫鸿 陈学同",
+        "rd": "Unknown User (shaobinfeng)  胡萍  韩瑞祥  操民康  Unknown User (lilanyue)",
+        "qa": "闫鸿  Unknown User (chenxuetong)",
         "note": "已提测",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "首页新增平谷飞象入口",
         "rd": "龙孔军",
         "qa": "闫鸿",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "人教SDK前置预加载&优化",
-        "rd": "张媛媛",
-        "qa": "李声娇",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "S3 ai助手",
-        "rd": "操民康 季颖达 胡萍",
-        "qa": "李佳新 闫鸿",
-        "note": "回测需要关注下 ai助手，电子书包，作文辅导，ai伴读的对话场景 需要关注下非s3的设备拍照物理键功能是否正常",
-        "jira": [],
-        "status": ""
+        "rd": "操民康  季颖达  胡萍",
+        "qa": "李佳新  闫鸿",
+        "note": "回测需要关注下 ai助手，电子书包，作文辅导，ai伴读的对话场景需要关注下非s3的设备拍照物理键功能是否正常",
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "视频播放引擎升级 [JIRA:MEGREZ-30718]",
-        "rd": "张媛媛",
-        "qa": "李声娇",
+        "name": "视频播放引擎升级Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30718",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [
-          "MEGREZ-30718"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "绘画本添加排查日志",
         "rd": "邢春涛",
-        "qa": "李声娇",
-        "note": "回测关注： 正常书写,翻页, 笔迹正常保存即可",
-        "jira": [],
-        "status": ""
+        "qa": "Unknown User (lishengjiao)",
+        "note": "回测关注：正常书写,翻页, 笔迹正常保存即可",
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "接口序列号改造 [JIRA:MEGREZ-30829]",
-        "rd": "",
-        "qa": "李声娇",
+        "name": "接口序列号改造Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30829",
+        "rd": "Unknown User (lilanyue)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [
-          "MEGREZ-30829"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "用户锁屏时获取签名图片失败修复",
-        "rd": "邵滨峰",
-        "qa": "李声娇",
+        "rd": "Unknown User (shaobinfeng)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "听写卡住问题修复 [JIRA:MEGREZ-30479]",
-        "rd": "宋志阳 龙孔军",
+        "name": "听写卡住问题修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30479",
+        "rd": "宋志阳  龙孔军",
         "qa": "祁海鹏",
-        "note": "回测关注： 1、音视频正常播放 2、听写类练习正常",
-        "jira": [
-          "MEGREZ-30479"
-        ],
-        "status": ""
+        "note": "回测关注：1、音视频正常播放2、听写类练习正常",
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -1904,7 +2052,7 @@
       ],
       "features": [
         {
-          "name": "体系学课程",
+          "name": "体系学课程 朱丝琪",
           "devices": "S2系列",
           "entry": "首页",
           "detail_parts": [
@@ -1925,18 +2073,16 @@
     "version": "2.54.0",
     "model": "",
     "date": "2025-08-15",
-    "type": "版本",
-    "pm": "工厂版本 占用",
-    "is_firmware": false,
-    "raw_title": "【版本】2.54.0 【日期】20250815 – S3 工厂版本占用",
+    "type": "",
+    "pm": "",
     "features": [
       {
         "name": "7.25 版本全量功能，不包含 ai 语音助手",
-        "rd": "邵滨峰",
+        "rd": "Unknown User (shaobinfeng)",
         "qa": "",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": null
@@ -1945,104 +2091,96 @@
     "version": "2.53.0",
     "model": "",
     "date": "2025-08-08",
-    "type": "版本",
+    "type": "",
     "pm": "",
-    "is_firmware": false,
-    "raw_title": "【版本】2.53.0 【日期】20250808",
     "features": [
       {
         "name": "关灯实验",
         "rd": "胡萍",
         "qa": "李佳新",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "电台管控问题修复",
         "rd": "胡萍",
         "qa": "李佳新",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "自研点读对 & 符号兼容，避免崩溃 MEGREZ-30324 - A - 修复自研点读对 & 符号兼容问题，避免崩溃 Done",
+        "name": "自研点读对 & 符号兼容，避免崩溃 MEGREZ-30324 - A - 修复自研点读对 & 符号兼容问题，避免崩溃 Done",
         "rd": "宋志阳",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-30324"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
-        "name": "自研点读翻译框遮挡原文内容 [JIRA:MEGREZ-30326]",
-        "rd": "张媛媛",
+        "name": "自研点读翻译框遮挡原文内容Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-30326",
+        "rd": "Unknown User (zhangyuanyuanbj02)",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-30326"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "首页内存泄露修复",
         "rd": "@邢春涛",
         "qa": "闫鸿",
         "note": "",
-        "jira": [
-          "MEGREZ-30335"
-        ],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "海尼曼分级阅读二期",
-        "rd": "龙孔军 邵滨峰",
-        "qa": "李声娇",
+        "rd": "龙孔军  Unknown User (shaobinfeng)",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "AI视频展示方案",
         "rd": "韩瑞祥",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "学练机登录相关接口域名(ape-api)替换成 megrez",
         "rd": "张川川",
-        "qa": "李声娇",
+        "qa": "Unknown User (lishengjiao)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "电子书包",
-        "rd": "张媛媛",
-        "qa": "祁海鹏 陈学同",
+        "rd": "Unknown User (lilanyue)  Unknown User (zhangyuanyuanbj02)",
+        "qa": "祁海鹏  Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "S3替换启动页logo",
         "rd": "龙孔军",
         "qa": "",
         "note": "系统测试验收",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       },
       {
         "name": "拍批拍搜结果页展示标签",
         "rd": "操民康",
-        "qa": "陈学同",
+        "qa": "Unknown User (chenxuetong)",
         "note": "",
-        "jira": [],
-        "status": ""
+        "status": "—",
+        "jira": []
       }
     ],
     "shimo": {
@@ -2053,24 +2191,45 @@
       ],
       "features": [
         {
-          "name": "电子书包",
+          "name": "电子书包 邱茜",
           "devices": "S2系列&E1",
           "entry": "首页",
           "detail_parts": [
             {
-              "label": null,
-              "text": "1-12年级；教材：支持教材添加（分官方资源和云文件资源）、阅读、伴学、做笔记；官方教材：用户进入云文件>教材tab，符合用户个人中心年级版本的官方合作书本（目前只有部分年级的语文/英语书本，范围同课文点读功能）会自动出现在页面内 进入书本可以正常点读 点击【小猿伴学】浮窗进入ai伴学模式，不支持点读，支持书写笔；教辅/试卷：支持用户从云文件导入教辅、试卷学习资源进入电子书包归档，支持批改。；其他：支持用户从云文件导入其他学习资源添加到电子书包归档。；智慧是指ai伴学使电子书的功能更加强大，用户可以利用伴学答疑实现自学 减负一指电子教材对学生肩膀的解放，假期不用背书本回家也可以随时查阅书本信息；二指在课下预复习场景对家长的解放，无需家长陪伴讲解和查资料，一切交给小猿伴学 主要宣传小初语文"
+              "label": "升级内容",
+              "text": "教材：支持教材添加（分官方资源和云文件资源）、阅读、伴学、做笔记；官方教材：用户进入云文件>教材tab，符合用户个人中心年级版本的官方合作书本（目前只有部分年级的语文/英语书本，范围同课文点读功能）会"
             }
           ]
         },
         {
-          "name": "海尼曼二期",
+          "name": "进入书本可以正常点读",
           "devices": "",
-          "entry": "小学-专项突破-英语  学龄前-首页（仅E1有）",
+          "entry": "",
           "detail_parts": [
             {
               "label": null,
-              "text": "科目：主要是小初语文、小初数学、小初英语，加小初其他科目（很少）；场景：所有题目解析场景均可能出现；视频出现时机：不是 100%，得是这个题本身有 AI视频+没有更高质量的人工录制视频，才会出现 如何感知：在视频上方会出现「视频由猿力大模型生成」的提示字样，目的是降低用户预期，有更包容的心态去看待 Ai 视频；用户如何反馈：观看视频中或视频播放结束后，都可以反馈。"
+              "text": "点击【小猿伴学】浮窗进入ai伴学模式，不支持点读，支持书写笔记，支持基于课时内容的ai问答如“带我预习”、“学习生字”、“作者介绍”、“课后习题讨论”等用户自由发问，解决课前预习答疑问题 云文件教材：用户进入家长端小程序，在共享文件搜索x年级上/下册xx版本找到匹配的书本添加进云文件，再从电子书包选择云文件添加进书包>教材tab，就可以使用了"
+            }
+          ]
+        },
+        {
+          "name": "海尼曼二期 孟玉陈",
+          "devices": "",
+          "entry": "小学-专项突破-英语  学龄前-首页（仅E1有）",
+          "detail_parts": []
+        },
+        {
+          "name": "AI视频 崔光映",
+          "devices": "",
+          "entry": "",
+          "detail_parts": [
+            {
+              "label": "关注点",
+              "text": "虽然 AI 视频在上线前经过了一些审核和过滤，但无法保证 100% 的视频一定都不会出现问题，因此需要各方团队关注下这里的用户反馈，同时我们也提供了用户直接对视频的 反馈能力"
+            },
+            {
+              "label": null,
+              "text": "更新了什么：为提高视频满足率，用 AI 生成了一些讲题视频，当用户进入题目解析页的时候有可能会看到 能看到 AI 视频的用户占比：30%，且用户需满足注册时间>14天， 注册时间≤14天的都看不到AI视频（防止 AI 视频出问题引起退货）"
             }
           ]
         }

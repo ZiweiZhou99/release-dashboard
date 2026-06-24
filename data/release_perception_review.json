@@ -1,0 +1,1227 @@
+{
+  "generated_at": "2026-06-23 21:02",
+  "months": 6,
+  "cutoff_date": "2025-12-25",
+  "release_count": 16,
+  "releases": [
+    {
+      "version": "2.74.0",
+      "date": "2026-07-20",
+      "model": "E2, E2H",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 0,
+        "uncertain": 0,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "E2/E2H适配(暂定)",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "",
+          "qa": "",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.73.0",
+      "date": "2026-06-29",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 4,
+        "uncertain": 1,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "S2语音助手",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "王雪",
+          "status": "—"
+        },
+        {
+          "name": "作文批改渲染替换成 markwon",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "备考计划支持跨册次",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "荆薇  李业来  王建明",
+          "qa": "闫鸿  李佳新",
+          "status": "—"
+        },
+        {
+          "name": "试卷「名校专区」标签",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康  李业来",
+          "qa": "王雪",
+          "status": "—"
+        },
+        {
+          "name": "迷宫资源拆分",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "王雪",
+          "status": "—"
+        },
+        {
+          "name": "手写问题修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-35320",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "汤景",
+          "qa": "闫鸿",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.72.0-1",
+      "date": "2026-06-16",
+      "model": "S2、E1、S6",
+      "type": "热更版本",
+      "stats": {
+        "suggested_yes": 1,
+        "uncertain": 0,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "回滚：2.72.0修改的互动阅读听书相关功能；",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "FIX：PDF资料崩溃",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康  邢春涛",
+          "qa": "闫鸿",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.72.0",
+      "date": "2026-06-15",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 6,
+        "uncertain": 6,
+        "suggested_no": 5
+      },
+      "items": [
+        {
+          "name": "AI精准复习-文科（备考）周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "复习流程：文科方案根据各科教研定义的复习模块依次进行",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "小学语文 / 初中语文：基础知识夯实 → 诗文应用 → 阅读理解 → 写作表达",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "文科备考",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "荆薇  龙孔军  邢春涛  李业来  谭坚铭  王建明",
+          "qa": "闫鸿  王雪",
+          "status": "—"
+        },
+        {
+          "name": "暑假计划周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "语文&英语作文批改高考管控",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "王雪",
+          "status": "—"
+        },
+        {
+          "name": "ai答疑对话气泡内替换成 markwon渲染",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "-",
+          "status": "—"
+        },
+        {
+          "name": "push版本升级",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "-",
+          "status": "—"
+        },
+        {
+          "name": "初中英语：基础巩固 → 篇章强化 → 技能突破",
+          "source": "shimo",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "小学英语：基础知识强化 → 技能突破",
+          "source": "shimo",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "支持学段学科：小学数语英、初中数语英物理化学",
+          "source": "shimo",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "题目详情页替换成webview",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "@操民康",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "修复诊断报告的问题",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "小猿电台问题修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "崩溃修复3处",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "回测关注",
+          "status": "—"
+        },
+        {
+          "name": "崩溃和oom修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "回测关注",
+          "status": "—"
+        },
+        {
+          "name": "问题修复 - 材料中作答的题目订正",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军",
+          "qa": "回测关注",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.71.5",
+      "date": "2026-05-25",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 2,
+        "uncertain": 4,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "口算多账号错题本同步",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康  胡云灏",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "语音助手迁移至系统",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "extension仓库独立包名(dev下, 线上无影响)",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "无需",
+          "status": "—"
+        },
+        {
+          "name": "学龄前拆分-小猿电台",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "拍批接入大模型",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康  谭坚铭",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "飞象登录流程改造",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥  荆薇  李业来",
+          "qa": "闫鸿  王雪",
+          "status": "—"
+        },
+        {
+          "name": "修复绘画本笔迹被截断问题Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-34625",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "闫鸿",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.70.4",
+      "date": "2026-05-11",
+      "model": "E1",
+      "type": "小版本",
+      "stats": {
+        "suggested_yes": 0,
+        "uncertain": 0,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "修复互动题变大的问题",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "李佳新",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.70.1",
+      "date": "2026-05-08",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 5,
+        "uncertain": 6,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "全学科诊断",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军  Unknown User (shaobinfeng)  Unknown User (luomaobj)  Unknown User (cuixiaofeng)  王建明  胡萍  廉凯旋",
+          "qa": "李佳新  Unknown User (chenxuetong)  Unknown User (zhuodongxue)  闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "全学科诊断周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "凸显好成绩与学练机练习的相关性",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "学练侧优化--S6设备更换锁屏图片&修改「名师课」tab名称",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)  王建明",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        },
+        {
+          "name": "统一学习机、学练机计算逻辑",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军  冯健",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "S6设备更换锁屏图片周子威",
+          "source": "shimo",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "octopus日志通过frog上报",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "张川川",
+          "qa": "-",
+          "status": "—"
+        },
+        {
+          "name": "备注：当前需要用户更改签名后才会生效",
+          "source": "shimo",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "拍批错题本题目详情页ai答疑加载异常",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "",
+          "status": "—"
+        },
+        {
+          "name": "推送AppId配置修改",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "无需测试",
+          "status": "—"
+        },
+        {
+          "name": "自研点读轨迹不上报Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-34233",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "2.69灰度问题修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.69.3",
+      "date": "2026-04-21",
+      "model": "S2、E1、S6",
+      "type": "小版本",
+      "stats": {
+        "suggested_yes": 0,
+        "uncertain": 0,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "修复0420热更版本偶现热更不生效问题",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.69.1-1",
+      "date": "2026-04-20",
+      "model": "S2、E1、S6",
+      "type": "热更版本",
+      "stats": {
+        "suggested_yes": 0,
+        "uncertain": 0,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "修复0414版本用户反馈--绘画本笔迹上移",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.69.1",
+      "date": "2026-04-14",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 5,
+        "uncertain": 7,
+        "suggested_no": 1
+      },
+      "items": [
+        {
+          "name": "AI精准复习-期中周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "学练机push优化",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛  Unknown User (cuixiaofeng)  张川川",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        },
+        {
+          "name": "期中AI精准复习",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (zhangyuanyuanbj02)  王建明",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "试卷辅助生产",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)  邢春涛",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "阶段测优化",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军",
+          "qa": "Unknown User (zhuodongxue)",
+          "status": "—"
+        },
+        {
+          "name": "Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33992优化教辅pdf图片练习图片存储方式",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "frog耗时监控",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "研发自测",
+          "status": "—"
+        },
+        {
+          "name": "学练机应用拆分 Permanent",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "张川川",
+          "qa": "Unknown User (zhuodongxue)",
+          "status": "—"
+        },
+        {
+          "name": "学练机应用拆分升级",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (dubo01)  张川川  田韦华  董骞",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "学龄前应用拆分",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍  张川川",
+          "qa": "李佳新  Unknown User (lishengjiao)",
+          "status": "—"
+        },
+        {
+          "name": "调整云文件同步轮询间隔从30分钟到60分钟",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "",
+          "status": "—"
+        },
+        {
+          "name": "首页版本更新相关同步调用改为异步调用",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)",
+          "qa": "回测关注即可",
+          "status": "—"
+        },
+        {
+          "name": "崩溃问题修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.67.0",
+      "date": "2026-03-30",
+      "model": "S2、E1、S6、S1",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 3,
+        "uncertain": 1,
+        "suggested_no": 3
+      },
+      "items": [
+        {
+          "name": "单元真题测优化周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "支持英语作文批改周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "英语作文批改",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (zhangyuanyuanbj02)  韩瑞祥",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "举一反三更改为实时请求",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)  胡云灏",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "互动阅读zip打开失败修复: 问题",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "",
+          "status": "—"
+        },
+        {
+          "name": "修复北京人教电子书包无法打开伴学模式的问题",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "",
+          "status": "—"
+        },
+        {
+          "name": "拍批详情崩溃修复 & h5 视频播放失败兜底",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.66.1",
+      "date": "2026-03-11",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 3,
+        "uncertain": 3,
+        "suggested_no": 6
+      },
+      "items": [
+        {
+          "name": "单元真题测",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "单元真题测周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "牛津阅读树-部分绘本下线孟玉陈",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "flavor彩色资源打包替换",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "汤景",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "人教缓存优化",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (zhangyuanyuanbj02)",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "拍批相关详情页webview化",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥  徐永林",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        },
+        {
+          "name": "frog公参修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "刘妙玉",
+          "status": "—"
+        },
+        {
+          "name": "线上子线程npe修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "胡萍",
+          "qa": "不需要测试",
+          "status": "—"
+        },
+        {
+          "name": "绘本跟读结果页出现时机问题修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (zhangyuanyuanbj02)",
+          "qa": "不需要测试",
+          "status": "—"
+        },
+        {
+          "name": "英语点读进程年级学期未同步bug 修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "张川川",
+          "qa": "-",
+          "status": "—"
+        },
+        {
+          "name": "错题本按日期选中不了所有错题的问题修复",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)",
+          "qa": "Unknown User (zhuodongxue)",
+          "status": "—"
+        },
+        {
+          "name": "首页ANRJira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33387",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军",
+          "qa": "闫鸿",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.65.0",
+      "date": "2026-02-03",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 6,
+        "uncertain": 1,
+        "suggested_no": 0
+      },
+      "items": [
+        {
+          "name": "-ai助手外显",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康  胡萍  吴先坤",
+          "qa": "李佳新",
+          "status": "—"
+        },
+        {
+          "name": "2xx,4xx,6xx相关题目拍批结果页展示优化",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "宋志阳",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        },
+        {
+          "name": "AI语音助手优化张恒志",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "同步练、试卷练等练习增加练习评价征询",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "练习反馈征询",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军  李业来",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        },
+        {
+          "name": "错题本分页优化",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)  胡云灏",
+          "qa": "Unknown User (zhuodongxue)",
+          "status": "—"
+        },
+        {
+          "name": "lua 通用参数去除ping 排序策略去除User信息添加缓存",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "张川川",
+          "qa": "-",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.64.11",
+      "date": "2026-01-19",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 7,
+        "uncertain": 4,
+        "suggested_no": 3
+      },
+      "items": [
+        {
+          "name": "反应慢优化+刷新模式设置",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "听写中断无法恢复",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军",
+          "qa": "Unknown User (zhuodongxue)",
+          "status": "—"
+        },
+        {
+          "name": "寒假规划",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)  李业来",
+          "qa": "李佳新  Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "寒假计划孟玉陈",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "电子书包优化",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (zhangyuanyuanbj02)  Unknown User (luomaobj)",
+          "qa": "闫鸿",
+          "status": "—"
+        },
+        {
+          "name": "电子书包优化孟玉陈",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "首页功能切换提速周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "frog增加entrance和newFunctionId",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "",
+          "status": "—"
+        },
+        {
+          "name": "作文辅导文案调整Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33225",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "支持学段学科：小学数语英、初中数语英物理化学",
+          "source": "shimo",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "离线日志耗时优化",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (dubo01)",
+          "qa": "-",
+          "status": "—"
+        },
+        {
+          "name": "laterbug修复Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33051Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-31567",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "Unknown User (zhuodongxue)",
+          "status": "—"
+        },
+        {
+          "name": "修复文件信息回捞失效 & 新增修改日志",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "韩瑞祥",
+          "qa": "无",
+          "status": "—"
+        },
+        {
+          "name": "回测问题修复（退出登陆账号信息变为未登陆）Jira46627c57-89b9-30f0-bb28-547e0dc98f4bMEGREZ-33066",
+          "source": "confluence",
+          "auto": "suggested_no",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军",
+          "qa": "Unknown User (chenxuetong)",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.63.11",
+      "date": "2026-01-07",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 0,
+        "uncertain": 1,
+        "suggested_no": 0
+      },
+      "items": [
+        {
+          "name": "frog 耗时优化",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "操民康",
+          "qa": "Unknown User (zhuodongxue)",
+          "status": "—"
+        }
+      ]
+    },
+    {
+      "version": "2.63.0",
+      "date": "2026-01-05",
+      "model": "S2、E1、S6",
+      "type": "软件",
+      "stats": {
+        "suggested_yes": 4,
+        "uncertain": 2,
+        "suggested_no": 0
+      },
+      "items": [
+        {
+          "name": "AI精准复习周子威",
+          "source": "shimo",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": ""
+        },
+        {
+          "name": "个性化备考",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (cuixiaofeng)  罗茂  王建明  何雷  唐培根  胡萍  龙孔军  Unknown User (zhangyuanyuanbj02)  操民康",
+          "qa": "Unknown User (lishengjiao)  Unknown User (zhuodongxue)  李佳新  Unknown User (chenxuetong)",
+          "status": "—"
+        },
+        {
+          "name": "家长管控接入push",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "邢春涛  胡萍",
+          "qa": "Unknown User (lishengjiao)",
+          "status": "—"
+        },
+        {
+          "name": "通用练习 - 未作答优化",
+          "source": "confluence",
+          "auto": "suggested_yes",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "龙孔军  廉凯旋",
+          "qa": "-",
+          "status": "—"
+        },
+        {
+          "name": "NetworkExceptionReport中重复的网络成功日志改为v类",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)",
+          "qa": "-",
+          "status": "—"
+        },
+        {
+          "name": "网络请求通用参数中加入did",
+          "source": "confluence",
+          "auto": "uncertain",
+          "user_perceivable": null,
+          "note": "",
+          "rd": "Unknown User (shaobinfeng)",
+          "qa": "-",
+          "status": "—"
+        }
+      ]
+    }
+  ]
+}

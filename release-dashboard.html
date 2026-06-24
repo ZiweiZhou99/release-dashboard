@@ -113,6 +113,36 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(79,142,247,.03)}
 .footer a{color:var(--accent);text-decoration:none}
 .empty{text-align:center;padding:50px 20px;color:var(--text2)}.empty .ei{font-size:40px;margin-bottom:12px}
 
+/* Voice closure view */
+#closureView{display:none;flex:1;overflow:hidden}
+.vc-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.vc-chip{padding:4px 10px;border-radius:16px;font-size:11px;border:1px solid var(--border);background:var(--card);cursor:pointer;color:var(--text2)}
+.vc-chip.on{background:rgba(79,142,247,.12);border-color:var(--accent);color:var(--accent);font-weight:600}
+.vc-stats{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.vc-stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;min-width:100px;box-shadow:var(--sh)}
+.vc-stat-l{font-size:10px;color:var(--text2)}.vc-stat-v{font-size:18px;font-weight:700;margin-top:2px}
+.vc-feat{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;box-shadow:var(--sh)}
+.vc-feat-hd{padding:12px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;user-select:none}
+.vc-feat-hd:hover{background:rgba(79,142,247,.03)}
+.vc-feat-title{font-size:13px;font-weight:600;flex:1}
+.vc-feat-meta{font-size:11px;color:var(--text2);margin-top:4px;line-height:1.5}
+.vc-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;white-space:nowrap}
+.vc-badge-yes{background:rgba(34,197,94,.12);color:#22c55e}
+.vc-badge-warn{background:rgba(245,158,11,.12);color:#d97706}
+.vc-badge-muted{background:var(--tag-bg);color:var(--text2)}
+.vc-link-tbl{font-size:11px}
+.vc-link-tbl td{padding:8px 10px}
+.vc-actions{display:flex;gap:4px;flex-wrap:wrap}
+.vc-act{border:1px solid var(--border);background:var(--bg);border-radius:6px;padding:3px 8px;font-size:10px;cursor:pointer}
+.vc-act:hover{border-color:var(--accent);color:var(--accent)}
+.vc-act.yes.on{background:rgba(34,197,94,.15);border-color:#22c55e;color:#16a34a}
+.vc-act.no.on{background:rgba(239,68,68,.1);border-color:#ef4444;color:#dc2626}
+.vc-act.out.on{background:rgba(124,92,252,.12);border-color:var(--accent2);color:var(--accent2)}
+.vc-pager{display:flex;gap:8px;align-items:center;justify-content:center;padding:10px;font-size:11px;color:var(--text2)}
+.vc-export-bar{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.vc-token-inp{width:90px;font-size:11px;padding:4px 8px;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--text)}
+.vc-save-hint{font-size:11px;color:var(--text2)}
+
 /* Ticket view */
 #ticketView{display:none;flex:1;flex-direction:column;overflow:hidden}
 .tk-wrap{flex:1;overflow-y:auto;padding:20px}
@@ -378,6 +408,28 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(79,142,247,.03)}
 // ─── Data (loaded from /upload-api/data/*.json) ───
 let R = [], TK = [], FB_RAW = [], SF_RAW = [], SF = [], FB = [];
 const DATA_API = '/upload-api/data';
+const UPLOAD_API = '/upload-api';
+const dataLoaded = { releases: false, tickets: false, feedback: false, store: false };
+let dataFileVersions = null;
+let voicesLoading = false;
+
+function invalidateDataVersions() { dataFileVersions = null; }
+
+async function ensureDataVersions() {
+  if (dataFileVersions) return dataFileVersions;
+  try {
+    const res = await fetch(`${UPLOAD_API}/api/data-status`, { cache: 'default' });
+    if (res.ok) {
+      const d = await res.json();
+      dataFileVersions = d.mtimes || {};
+    } else {
+      dataFileVersions = {};
+    }
+  } catch (_) {
+    dataFileVersions = {};
+  }
+  return dataFileVersions;
+}
 
 function rebuildSF() {
   SF = SF_RAW.map(r => ({
@@ -393,7 +445,9 @@ function rebuildFeedbackDerived() {
 }
 
 async function fetchDataJson(name) {
-  const res = await fetch(`${DATA_API}/${name}.json`, { cache: 'no-store' });
+  const mtimes = await ensureDataVersions();
+  const tag = (mtimes[name] || '').replace(/[^\d]/g, '') || String(Date.now());
+  const res = await fetch(`${DATA_API}/${name}.json?v=${tag}`, { cache: 'default' });
   if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
   return res.json();
 }
@@ -449,34 +503,39 @@ function setDataLoadStatus(state, message) {
 async function loadDashboardData(options) {
   options = options || {};
   const only = options.only;
-  const need = only || ['releases', 'tickets', 'feedback', 'store'];
-  if (!only) setDataLoadStatus('loading');
+  const need = only || ['releases'];
+  if (options.force) need.forEach(k => { dataLoaded[k] = false; });
+  const toLoad = need.filter(k => !dataLoaded[k]);
+  const showReleaseStatus = !only || only.includes('releases');
+  if (showReleaseStatus && toLoad.includes('releases')) setDataLoadStatus('loading');
 
   try {
     const loaders = {
-      releases: async () => { R = await fetchDataJson('releases') || []; },
-      tickets: async () => { TK = normalizeTickets(await fetchDataJson('tickets')) || []; },
-      feedback: async () => { FB_RAW = await fetchDataJson('feedback') || []; rebuildFeedbackDerived(); },
-      store: async () => { SF_RAW = await fetchDataJson('store') || []; rebuildSF(); },
+      releases: async () => { R = await fetchDataJson('releases') || []; dataLoaded.releases = true; },
+      tickets: async () => { TK = normalizeTickets(await fetchDataJson('tickets')) || []; dataLoaded.tickets = true; },
+      feedback: async () => { FB_RAW = await fetchDataJson('feedback') || []; rebuildFeedbackDerived(); dataLoaded.feedback = true; },
+      store: async () => { SF_RAW = await fetchDataJson('store') || []; rebuildSF(); dataLoaded.store = true; },
     };
-    await Promise.all(need.map(key => loaders[key]()));
+    await Promise.all(toLoad.map(key => loaders[key]()));
+    syncGlobalData();
+    if (toLoad.includes('tickets')) updateTKRange();
 
     if (!only) {
       onDashboardDataReady();
     } else {
-      if (only.includes('releases')) init();
-      if (only.some(k => ['tickets', 'feedback', 'store'].includes(k))) {
-        resetVoicesFilters(only);
-        if (only.includes('tickets') && currentVoicesTab === 'tickets') renderTickets();
-        if (only.includes('feedback') && currentVoicesTab === 'feedback') initFeedback();
-        if (only.includes('store') && currentVoicesTab === 'store') renderStore();
+      if (toLoad.includes('releases')) init();
+      if (toLoad.some(k => ['tickets', 'feedback', 'store'].includes(k))) {
+        resetVoicesFilters(toLoad);
+        if (toLoad.includes('tickets') && currentVoicesTab === 'tickets') renderTickets();
+        if (toLoad.includes('feedback') && currentVoicesTab === 'feedback') initFeedback();
+        if (toLoad.includes('store') && currentVoicesTab === 'store') renderStore();
       }
     }
-    setDataLoadStatus('ok');
+    if (showReleaseStatus) setDataLoadStatus('ok');
     return true;
   } catch (err) {
     console.error('loadDashboardData failed', err);
-    setDataLoadStatus('error', err.message || String(err));
+    if (showReleaseStatus) setDataLoadStatus('error', err.message || String(err));
     return false;
   }
 }
@@ -485,9 +544,40 @@ function onDashboardDataReady() {
   init();
 }
 
+function setVoicesLoadBanner(visible, text) {
+  const el = document.getElementById('voicesLoadBanner');
+  if (!el) return;
+  el.style.display = visible ? 'block' : 'none';
+  if (text) el.textContent = text;
+}
+
+async function ensureVoicesData() {
+  if (dataLoaded.tickets && dataLoaded.feedback && dataLoaded.store) return true;
+  if (voicesLoading) {
+    return new Promise(resolve => {
+      const t = setInterval(() => {
+        if (!voicesLoading) { clearInterval(t); resolve(dataLoaded.tickets && dataLoaded.feedback && dataLoaded.store); }
+      }, 200);
+    });
+  }
+  voicesLoading = true;
+  setVoicesLoadBanner(true, '⏳ 正在加载用户声音数据（工单约 4MB + 反馈，首次需等待）…');
+  try {
+    const ok = await loadDashboardData({ only: ['tickets', 'feedback', 'store'] });
+    if (!ok) setVoicesLoadBanner(true, '⚠️ 用户声音数据加载失败，请刷新重试');
+    else setVoicesLoadBanner(false);
+    return ok;
+  } finally {
+    voicesLoading = false;
+  }
+}
+
 async function reloadVoicesData(type) {
   const map = { tickets: ['tickets'], feedback: ['feedback'], store: ['store'] };
-  const ok = await loadDashboardData({ only: map[type] || ['tickets', 'feedback', 'store'] });
+  const keys = map[type] || ['tickets', 'feedback', 'store'];
+  keys.forEach(k => { dataLoaded[k] = false; });
+  invalidateDataVersions();
+  const ok = await loadDashboardData({ only: keys });
   if (ok) switchVoicesTab(currentVoicesTab);
   return ok;
 }
@@ -635,6 +725,7 @@ function sfRenderTrend(data){
     <div class="view-tabs">
       <span class="vtab active" id="vtab-release" onclick="switchView('release')">📋 发版记录</span>
       <span class="vtab" id="vtab-voices" onclick="switchView('voices')">🗣️ 用户声音</span>
+      <span class="vtab" id="vtab-closure" onclick="switchView('closure')">🔗 用户声音闭环</span>
       <span class="vtab" id="vtab-nps" onclick="switchView('nps')">📊 NPS</span>
     </div>
     <a href="https://confluence.zhenguanyu.com/pages/viewpage.action?pageId=917724867" target="_blank" class="slink">📄 Confluence</a>
@@ -680,6 +771,7 @@ function sfRenderTrend(data){
         <h2 style="font-size:16px;font-weight:700">🗣️ 用户声音</h2>
         <button class="upload-btn" onclick="openUploadModal('voices')" title="上传数据">⬆️ 上传数据</button>
       </div>
+      <div id="voicesLoadBanner" style="display:none;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;font-size:13px;color:var(--text2)">⏳ 正在加载用户声音数据…</div>
       <!-- Global search -->
       <div class="voices-search-bar">
         <span class="search-icon">🔍</span>
@@ -751,6 +843,31 @@ function sfRenderTrend(data){
     </div>
   </div>
 
+  <!-- Voice closure view -->
+  <div id="closureView">
+    <div class="sb">
+      <div class="sb-hd">
+        <div class="sb-logo">
+          <div class="sb-icon">🔗</div>
+          <div><div class="sb-title">用户声音闭环</div><div class="sb-sub">发版项 ↔ 工单/反馈关联</div></div>
+        </div>
+        <div class="sw"><span class="si">🔍</span><input type="text" id="vcSi" placeholder="搜索版本/发版项..." oninput="filterVcSB()"></div>
+      </div>
+      <div class="sb-list" id="vcSbList"></div>
+    </div>
+    <div class="main">
+      <div class="content" id="vcMain">
+        <div class="empty"><div class="ei">🔗</div><p>← 选择左侧版本，查看推荐关联并确认</p></div>
+      </div>
+      <div class="footer vc-export-bar">
+        <span class="vc-save-hint" id="vcSaveHint">确认结果保存在服务端</span>
+        <input type="password" class="vc-token-inp" id="vcToken" value="zzw2026" title="保存确认时的 Upload Token">
+        <button class="btn" onclick="exportVcLinksCsv()">📥 导出关联 CSV</button>
+        <button class="btn" onclick="exportVcReportMd()">📄 导出汇报 Markdown</button>
+      </div>
+    </div>
+  </div>
+
 </div><!-- /body-area -->
 
 <!-- Update modal -->
@@ -791,19 +908,362 @@ function getProdFeats(r){return r.shimo&&r.shimo.features?r.shimo.features.filte
 function switchView(v){
   document.getElementById('releaseView').style.display=v==='release'?'flex':'none';
   document.getElementById('voicesView').style.display=v==='voices'?'flex':'none';
+  document.getElementById('closureView').style.display=v==='closure'?'flex':'none';
   document.getElementById('npsView').style.display=v==='nps'?'block':'none';
-  ['release','voices','nps'].forEach(t=>{
+  ['release','voices','closure','nps'].forEach(t=>{
     document.getElementById('vtab-'+t).classList.toggle('active',t===v);
   });
+  if(v==='closure'){initVoiceClosure();}
   if(v==='voices'){
-    const activePane=document.querySelector('.voices-pane:not([style*="none"])');
-    const paneId=activePane?activePane.id.replace('voicesPane-',''):'tickets';
-    if(!activePane){switchVoicesTab('tickets');}
-    else if(paneId==='tickets')renderTickets();
-    else if(paneId==='feedback')renderFeedback();
-    else if(paneId==='store')renderStore();
+    ensureVoicesData().then(function(ok){
+      if(!ok) return;
+      const activePane=document.querySelector('.voices-pane:not([style*="none"])');
+      const paneId=activePane?activePane.id.replace('voicesPane-',''):'tickets';
+      if(!activePane){switchVoicesTab('tickets');}
+      else if(paneId==='tickets')renderTickets();
+      else if(paneId==='feedback')renderFeedback();
+      else if(paneId==='store')renderStore();
+    });
   }
   if(v==='nps')initNPS();
+}
+
+// ─── Voice Closure Tab ─────────────────────────
+let VC_LEDGER=null, VC_LINKS=null, VC_STATE=null, vcLoaded=false, vcLoading=false;
+let vcCurVer=null, vcExpanded={}, vcPageByFeat={};
+const VC_PER_PAGE=40;
+let vcFilter={perceivableOnly:true, unconfirmedOnly:false, outreachOnly:false};
+let vcSaveQueue={}, vcSaveTimer=null;
+
+async function loadVoiceClosureData(){
+  if(vcLoading) return false;
+  vcLoading=true;
+  try{
+    const [ledger, links, state]=await Promise.all([
+      fetchDataJson('voice_closure_ledger'),
+      fetchDataJson('voice_closure_links'),
+      fetchDataJson('voice_closure_state'),
+    ]);
+    VC_LEDGER=ledger;
+    VC_LINKS=links;
+    VC_STATE=state||{links:{}};
+    if(!VC_STATE.links) VC_STATE.links={};
+    vcLoaded=true;
+    return true;
+  }catch(e){
+    console.error('loadVoiceClosureData',e);
+    return false;
+  }finally{vcLoading=false;}
+}
+
+function vcVersions(){
+  if(!VC_LEDGER||!VC_LEDGER.items) return [];
+  const map=new Map();
+  VC_LEDGER.items.forEach(it=>{
+    if(!map.has(it.version)) map.set(it.version,{version:it.version,date:it.date,model:it.model,perceivable:0,links:0});
+    const v=map.get(it.version);
+    if(it.perceivable) v.perceivable++;
+    v.links+=it.linkCount||0;
+  });
+  return Array.from(map.values()).sort((a,b)=>b.version.localeCompare(a.version,undefined,{numeric:true}));
+}
+
+function vcFeaturesForVersion(ver){
+  if(!VC_LEDGER) return [];
+  return VC_LEDGER.items.filter(it=>{
+    if(it.version!==ver) return false;
+    if(vcFilter.perceivableOnly&&!it.perceivable) return false;
+    return true;
+  });
+}
+
+function vcLinksForFeature(fid){
+  if(!VC_LINKS||!VC_LINKS.links) return [];
+  return VC_LINKS.links.filter(l=>l.featureId===fid);
+}
+
+function getLinkState(linkId){
+  const s=VC_STATE&&VC_STATE.links?VC_STATE.links[linkId]:null;
+  return {
+    confirmed:s&&s.confirmed?s.confirmed:'pending',
+    needOutreach:s&&s.needOutreach?s.needOutreach:'pending',
+    outreachStatus:s&&s.outreachStatus?s.outreachStatus:'未触达',
+  };
+}
+
+function queueVcSave(linkId,patch){
+  vcSaveQueue[linkId]=Object.assign(vcSaveQueue[linkId]||{},patch,{updatedAt:new Date().toISOString().slice(0,19).replace('T',' ')});
+  clearTimeout(vcSaveTimer);
+  vcSaveTimer=setTimeout(flushVcState,400);
+  const hint=document.getElementById('vcSaveHint');
+  if(hint) hint.textContent='保存中…';
+}
+
+async function flushVcState(){
+  const updates=vcSaveQueue;
+  vcSaveQueue={};
+  if(!Object.keys(updates).length) return;
+  Object.keys(updates).forEach(id=>{
+    VC_STATE.links[id]=Object.assign(VC_STATE.links[id]||{},updates[id]);
+  });
+  const token=(document.getElementById('vcToken')||{}).value||'zzw2026';
+  const hint=document.getElementById('vcSaveHint');
+  try{
+    const res=await fetch(UPLOAD_API+'/voice-closure/state',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-Upload-Token':token},
+      body:JSON.stringify({updates}),
+    });
+    const d=await res.json();
+    if(d.ok){
+      if(hint) hint.textContent='已保存 '+new Date().toLocaleTimeString();
+    }else{
+      if(hint) hint.textContent='保存失败: '+(d.error||'未知错误');
+    }
+  }catch(e){
+    if(hint) hint.textContent='保存失败: '+e.message;
+  }
+}
+
+function setLinkConfirmed(linkId,val){
+  queueVcSave(linkId,{confirmed:val});
+  renderVcMain();
+}
+
+function setLinkOutreach(linkId,val){
+  queueVcSave(linkId,{needOutreach:val});
+  renderVcMain();
+}
+
+function toggleVcFilter(key){
+  vcFilter[key]=!vcFilter[key];
+  renderVcMain();
+}
+
+function filterVcSB(){
+  const q=(document.getElementById('vcSi').value||'').trim().toLowerCase();
+  document.querySelectorAll('#vcSbList .vi').forEach(el=>{
+    el.style.display=(!q||el.dataset.q.includes(q))?'':'none';
+  });
+}
+
+function buildVcSidebar(){
+  const list=document.getElementById('vcSbList');
+  if(!list) return;
+  const vers=vcVersions();
+  list.innerHTML=vers.map(v=>{
+    const q=(v.version+' '+v.date+' '+v.model).toLowerCase();
+    const active=v.version===vcCurVer?' active':'';
+    return '<div class="vi'+active+'" data-q="'+esc(q)+'" onclick="selectVcVersion(\''+esc(v.version)+'\')">'+
+      '<div class="vi-dot"></div><div class="vi-body">'+
+      '<div class="vi-ver">'+esc(v.version)+'</div>'+
+      '<div class="vi-meta">'+esc(v.date)+' · 可感知 '+v.perceivable+' · 召回 '+v.links+'</div>'+
+      '<div class="vi-models"><span class="vi-model">'+esc(v.model)+'</span></div>'+
+      '</div></div>';
+  }).join('');
+}
+
+function selectVcVersion(ver){
+  vcCurVer=ver;
+  vcExpanded={};
+  vcPageByFeat={};
+  buildVcSidebar();
+  renderVcMain();
+}
+
+function toggleVcFeat(fid){
+  vcExpanded[fid]=!vcExpanded[fid];
+  if(!vcPageByFeat[fid]) vcPageByFeat[fid]=1;
+  renderVcMain();
+}
+
+function vcFeatPage(fid,delta){
+  vcPageByFeat[fid]=(vcPageByFeat[fid]||1)+delta;
+  renderVcMain();
+}
+
+function vcCountStats(feats){
+  let recall=0,confirmed=0,rejected=0,pending=0,outreach=0;
+  feats.forEach(f=>{
+    const links=vcLinksForFeature(f.id);
+    recall+=links.length;
+    links.forEach(l=>{
+      const st=getLinkState(l.id);
+      if(st.confirmed==='yes') confirmed++;
+      else if(st.confirmed==='no') rejected++;
+      else pending++;
+      if(st.needOutreach==='yes') outreach++;
+    });
+  });
+  return {recall,confirmed,rejected,pending,outreach};
+}
+
+function renderVcMain(){
+  const main=document.getElementById('vcMain');
+  if(!main) return;
+  if(!vcLoaded){
+    main.innerHTML='<div class="empty"><div class="ei">⏳</div><p>加载闭环数据…</p></div>';
+    return;
+  }
+  if(!vcCurVer){
+    const vers=vcVersions().filter(v=>v.perceivable>0);
+    if(vers.length) selectVcVersion(vers[0].version);
+    else{ main.innerHTML='<div class="empty"><div class="ei">📭</div><p>台账中无可感知发版项</p></div>'; return; }
+    return;
+  }
+  const feats=vcFeaturesForVersion(vcCurVer);
+  const st=vcCountStats(feats);
+  let html='<div class="vh"><div class="vh-ver">'+esc(vcCurVer)+'</div>'+
+    '<div class="vh-tags"><span class="vh-tag">可感知 '+feats.length+' 项</span>'+
+    '<span class="vh-tag">召回 '+st.recall+'</span>'+
+    '<span class="vh-tag">已确认 '+st.confirmed+'</span>'+
+    '<span class="vh-tag">待确认 '+st.pending+'</span></div></div>';
+  html+='<div class="vc-toolbar">'+
+    '<span class="vc-chip'+(vcFilter.perceivableOnly?' on':'')+'" onclick="vcFilter.perceivableOnly=true;renderVcMain()">仅可感知</span>'+
+    '<span class="vc-chip'+(!vcFilter.perceivableOnly?' on':'')+'" onclick="vcFilter.perceivableOnly=false;renderVcMain()">全部发版项</span>'+
+    '<span class="vc-chip'+(vcFilter.unconfirmedOnly?' on':'')+'" onclick="toggleVcFilter(\'unconfirmedOnly\')">仅待确认</span>'+
+    '<span class="vc-chip'+(vcFilter.outreachOnly?' on':'')+'" onclick="toggleVcFilter(\'outreachOnly\')">仅标记触达</span>'+
+    '</div>';
+  html+='<div class="vc-stats">'+
+    '<div class="vc-stat"><div class="vc-stat-l">已确认</div><div class="vc-stat-v" style="color:#22c55e">'+st.confirmed+'</div></div>'+
+    '<div class="vc-stat"><div class="vc-stat-l">已排除</div><div class="vc-stat-v">'+st.rejected+'</div></div>'+
+    '<div class="vc-stat"><div class="vc-stat-l">待确认</div><div class="vc-stat-v" style="color:#f59e0b">'+st.pending+'</div></div>'+
+    '<div class="vc-stat"><div class="vc-stat-l">需触达</div><div class="vc-stat-v">'+st.outreach+'</div></div>'+
+    '</div>';
+  if(!feats.length){
+    html+='<div class="empty"><p>该版本无匹配发版项</p></div>';
+  }
+  feats.forEach(f=>{
+    const allLinks=vcLinksForFeature(f.id);
+    let links=allLinks.slice();
+    if(vcFilter.unconfirmedOnly) links=links.filter(l=>getLinkState(l.id).confirmed==='pending');
+    if(vcFilter.outreachOnly) links=links.filter(l=>getLinkState(l.id).needOutreach==='yes');
+    const expanded=!!vcExpanded[f.id];
+    const page=vcPageByFeat[f.id]||1;
+    const pages=Math.max(1,Math.ceil(links.length/VC_PER_PAGE));
+    const slice=links.slice((page-1)*VC_PER_PAGE,page*VC_PER_PAGE);
+    const fConfirmed=allLinks.filter(l=>getLinkState(l.id).confirmed==='yes').length;
+    html+='<div class="vc-feat"><div class="vc-feat-hd" onclick="toggleVcFeat(\''+esc(f.id)+'\')">'+
+      '<span style="font-size:12px;opacity:.5">'+(expanded?'▼':'▶')+'</span>'+
+      '<div style="flex:1"><div class="vc-feat-title">'+esc(f.name)+'</div>'+
+      '<div class="vc-feat-meta">'+(f.valueSummary?esc(f.valueSummary):'<span style="opacity:.6">（未填用户价值）</span>')+'</div></div>'+
+      '<span class="vc-badge '+(f.perceivable?'vc-badge-yes':'vc-badge-muted')+'">'+(f.perceivable?'可感知':'非可感知')+'</span>'+
+      '<span class="vc-badge vc-badge-warn">召回 '+allLinks.length+'</span>'+
+      '<span class="vc-badge vc-badge-yes">已确认 '+fConfirmed+'</span>'+
+      '</div>';
+    if(expanded){
+      html+='<div style="overflow-x:auto"><table class="vc-link-tbl"><thead><tr>'+
+        '<th>分</th><th>来源</th><th>时间</th><th>摘要</th><th>匹配词</th><th>操作</th><th>链接</th></tr></thead><tbody>';
+      if(!slice.length) html+='<tr><td colspan="7" style="text-align:center;color:var(--text2);padding:20px">无匹配条目</td></tr>';
+      slice.forEach(l=>{
+        const st=getLinkState(l.id);
+        html+='<tr><td><strong>'+l.score+'</strong></td>'+
+          '<td>'+esc(l.voiceSource)+'</td><td style="white-space:nowrap">'+esc((l.voiceTime||'').slice(0,16))+'</td>'+
+          '<td style="max-width:280px">'+esc(l.summary)+'</td>'+
+          '<td style="max-width:120px;color:var(--text2)">'+esc(l.keywords)+'</td>'+
+          '<td><div class="vc-actions">'+
+          '<button type="button" class="vc-act yes'+(st.confirmed==='yes'?' on':'')+'" data-vc-action="yes" data-link-id="'+esc(l.id)+'">✓确认</button>'+
+          '<button type="button" class="vc-act no'+(st.confirmed==='no'?' on':'')+'" data-vc-action="no" data-link-id="'+esc(l.id)+'">✗排除</button>'+
+          '<button type="button" class="vc-act out'+(st.needOutreach==='yes'?' on':'')+'" data-vc-action="outreach" data-link-id="'+esc(l.id)+'">📢触达</button>'+
+          '</div></td>'+
+          '<td>'+(l.url?'<a href="'+esc(l.url)+'" target="_blank" class="prod-src">打开</a>':'—')+'</td></tr>';
+      });
+      html+='</tbody></table></div>';
+      if(pages>1){
+        html+='<div class="vc-pager"><button class="btn" style="font-size:11px;padding:3px 8px"'+(page<=1?' disabled':'')+' onclick="vcFeatPage(\''+esc(f.id)+'\',-1)">上一页</button>'+
+          '<span>第 '+page+' / '+pages+' 页（共 '+links.length+' 条）</span>'+
+          '<button class="btn" style="font-size:11px;padding:3px 8px"'+(page>=pages?' disabled':'')+' onclick="vcFeatPage(\''+esc(f.id)+'\',1)">下一页</button></div>';
+      }
+    }
+    html+='</div>';
+  });
+  main.innerHTML=html;
+  main.onclick=function(e){
+    const btn=e.target.closest('[data-vc-action]');
+    if(!btn) return;
+    e.stopPropagation();
+    const id=btn.getAttribute('data-link-id');
+    const act=btn.getAttribute('data-vc-action');
+    if(act==='yes') setLinkConfirmed(id,'yes');
+    else if(act==='no') setLinkConfirmed(id,'no');
+    else if(act==='outreach') setLinkOutreach(id,'yes');
+  };
+}
+
+async function initVoiceClosure(){
+  const main=document.getElementById('vcMain');
+  if(!vcLoaded){
+    if(main) main.innerHTML='<div class="empty"><div class="ei">⏳</div><p>加载闭环数据…</p></div>';
+    const ok=await loadVoiceClosureData();
+    if(!ok){
+      if(main) main.innerHTML='<div class="empty"><div class="ei">⚠️</div><p>加载失败。请确认已部署 data/voice_closure_*.json</p></div>';
+      return;
+    }
+  }
+  buildVcSidebar();
+  renderVcMain();
+}
+
+function downloadText(filename,text,mime){
+  const blob=new Blob([text],{type:mime||'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function exportVcLinksCsv(){
+  if(!VC_LINKS) return;
+  const rows=VC_LINKS.links.map(l=>{
+    const st=getLinkState(l.id);
+    return [l.id,l.version,l.featureName,l.voiceSource,l.voiceTime,l.score,l.keywords,
+      st.confirmed,st.needOutreach,l.userId,l.summary,l.url].map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',');
+  });
+  const head='关联ID,版本,发版项,来源,时间,匹配分,匹配词,已确认,需触达,userId,摘要,链接';
+  downloadText('用户原声关联_'+new Date().toISOString().slice(0,10)+'.csv','\ufeff'+head+'\n'+rows.join('\n'),'text/csv');
+}
+
+function exportVcReportMd(){
+  if(!VC_LEDGER) return;
+  const items=VC_LEDGER.items.filter(i=>i.perceivable);
+  let confirmed=0,pending=0,outreach=0,recall=0;
+  (VC_LINKS.links||[]).forEach(l=>{
+    recall++;
+    const st=getLinkState(l.id);
+    if(st.confirmed==='yes') confirmed++;
+    else if(st.confirmed==='pending') pending++;
+    if(st.needOutreach==='yes') outreach++;
+  });
+  const touchable=(VC_LINKS.links||[]).filter(l=>l.voiceSource==='用户反馈'&&l.userId).length;
+  const md=[
+    '# 学练机发版 × 用户声音闭环 — 进度汇报',
+    '',
+    '**统计截止**：'+new Date().toLocaleString('zh-CN'),
+    '',
+    '## 进展总览',
+    '',
+    '| 指标 | 数值 |',
+    '|------|------|',
+    '| 用户可感知发版项 | **'+items.length+'** |',
+    '| 自动召回关联 | **'+recall+'** |',
+    '| 已人工确认 | **'+confirmed+'** |',
+    '| 待确认 | **'+pending+'** |',
+    '| 标记需触达 | **'+outreach+'** |',
+    '| 可触达用户（有 userId） | **'+touchable+'** |',
+    '',
+    '## 可感知发版项明细',
+    '',
+    '| 版本 | 发版项 | 召回 | 已确认 |',
+    '|------|--------|------|--------|',
+  ];
+  items.forEach(it=>{
+    const links=vcLinksForFeature(it.id);
+    const c=links.filter(l=>getLinkState(l.id).confirmed==='yes').length;
+    md.push('| '+it.version+' | '+it.name+' | '+links.length+' | '+c+' |');
+  });
+  md.push('','---','*由发版看板「用户声音闭环」Tab 导出*');
+  downloadText('发版用户声音闭环汇报_'+new Date().toISOString().slice(0,10)+'.md',md.join('\n'),'text/markdown');
 }
 
 let currentVoicesTab='tickets';
@@ -1030,6 +1490,32 @@ function subCluster(t){
   return parts[parts.length-1]||'其他';
 }
 
+function syncGlobalData() {
+  window.R = R;
+  window.TK = TK;
+  if (typeof FB !== 'undefined') window.FB = FB;
+  if (typeof SF !== 'undefined') window.SF = SF;
+}
+
+function updateTKRange() {
+  const el = document.getElementById('tk-date-range');
+  if (!el) return;
+  if (!TK || !TK.length) {
+    el.textContent = '📅 暂无数据';
+    return;
+  }
+  const dated = TK.map(t => t.time).filter(Boolean).map(s => {
+    const m = s.match(/^(\d{2})-(\d{2})/);
+    return m ? { label: s.substring(0, 5), d: new Date(2026, +m[1] - 1, +m[2]) } : null;
+  }).filter(Boolean);
+  if (!dated.length) {
+    el.textContent = '📅 共' + TK.length + '条';
+    return;
+  }
+  dated.sort((a, b) => a.d - b.d);
+  el.textContent = '📅 2026-' + dated[0].label + ' ~ 2026-' + dated[dated.length - 1].label + ' · 共' + TK.length + '条';
+}
+
 function renderTickets(){
   const clfF=document.getElementById('tkClfFilter').value;
   const devF=document.getElementById('tkDevFilter').value;
@@ -1166,7 +1652,7 @@ function startPolling(){
 }
 document.getElementById('updModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
-loadDashboardData();
+loadDashboardData({ only: ['releases'] });
 
 // ─── Feedback data ─────────────────────────────
 // FB_RAW: array-of-arrays [userId, desc, category, device, source, time]
@@ -1513,26 +1999,8 @@ function renderFbMatrix(data, top8cats) {
 function fbGo(p){ fbPage=p; renderFeedback(); document.getElementById('feedbackView').scrollIntoView({behavior:'smooth'}); }
 initFeedback();
 // ─── 暴露数据变量到全局，供第三个 script 块使用 ───
-window.R=R; window.TK=TK;
-// 动态更新TK统计信息
-(function() {
-  function updateTKRange() {
-    var el = document.getElementById('tk-date-range');
-    if (!el || !window.TK || !window.TK.length) return;
-    var times = window.TK.map(function(t) { return t.time; }).filter(Boolean);
-    var oldest = times[times.length - 1] || '';
-    var newest = times[0] || '';
-    el.textContent = '📅 ' + (oldest ? '2026-' + oldest.substring(0,5) : '') + ' ~ 2026-' + (newest ? newest.substring(0,5) : '') + ' · 共' + window.TK.length + '条';
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateTKRange);
-  } else {
-    updateTKRange();
-  }
-})();
-
-if(typeof FB!=='undefined') window.FB=FB;
-if(typeof SF!=='undefined') window.SF=SF;
+syncGlobalData();
+window.updateTKRange = updateTKRange;
 </script>
 
 <!-- ═══ 产品助手悬浮入口 ═══════════════════════════════════ -->
@@ -2196,8 +2664,6 @@ function renderNPS(){
 </div>
 
 <script>
-const UPLOAD_API='/upload-api';
-
 function openUploadModal(type){
   document.getElementById('ulModal').classList.add('show');
   document.getElementById('ulVoicesSections').style.display=type==='voices'?'block':'none';
@@ -2234,8 +2700,11 @@ function uploadVoicesFile(dataType){
   }).then(r=>r.json()).then(d=>{
     if(d.ok){
       setUlStatus('✅ 上传成功！共 '+d.rows+' 条数据 ('+d.file+')','ok');
-      // Reload data hint
-      setTimeout(async()=>{const ok=await reloadVoicesData(dataType);setUlStatus(ok?'✅ 数据已热更新':'⚠️ 上传成功但加载失败，请刷新页面','ok');},300);
+      invalidateDataVersions();
+      setTimeout(async()=>{
+        const ok=await reloadVoicesData(dataType);
+        setUlStatus(ok?'✅ 数据已热更新':'⚠️ 上传成功但加载失败，请刷新页面','ok');
+      },300);
     } else {
       setUlStatus('❌ '+(d.error||'上传失败'),'err');
     }

@@ -11,7 +11,7 @@ from html.parser import HTMLParser
 from collections import defaultdict
 import urllib.request, urllib.parse
 
-WORKSPACE = '/home/ubuntu/release-platform'
+WORKSPACE = os.environ.get('RELEASE_PLATFORM_HOME', os.path.dirname(os.path.abspath(__file__)))
 HTML_PATH = os.path.join(WORKSPACE, 'release-dashboard.html')
 DATA_DIR = os.path.join(WORKSPACE, 'data')
 RELEASES_JSON = os.path.join(DATA_DIR, 'releases.json')
@@ -25,31 +25,76 @@ def log(msg):
     print(f'[{ts}] {msg}', flush=True)
 
 # ─── Confluence ───────────────────────────────────────────────
-def load_conf_token():
-    # 优先用 cookie，fallback 到 bearer token
+def _conf_headers(auth_type, auth_val):
+    if auth_type == 'cookie':
+        return {'Cookie': auth_val, 'Accept': 'application/json'}
+    return {'Authorization': f'Bearer {auth_val}', 'Accept': 'application/json'}
+
+
+def load_conf_auths():
+    """Return auth methods to try: bearer token first, then cookie."""
+    auths = []
+    if os.path.exists(CONF_TOKEN_PATH):
+        with open(CONF_TOKEN_PATH) as f:
+            content = f.read().strip()
+        token = content.split('=', 1)[1].strip() if content.startswith('token=') else content
+        if token:
+            auths.append(('bearer', token))
     if os.path.exists(CONF_COOKIE_PATH):
         with open(CONF_COOKIE_PATH) as f:
-            return ('cookie', f.read().strip())
-    with open(CONF_TOKEN_PATH) as f:
-        content = f.read().strip()
-    if content.startswith('token='):
-        return ('bearer', content.split('=', 1)[1].strip())
-    return ('bearer', content)
+            cookie = f.read().strip()
+        if cookie:
+            auths.append(('cookie', cookie))
+    if not auths:
+        raise FileNotFoundError(
+            f'未找到 Confluence 凭证，请在 {CONF_TOKEN_PATH} 或 {CONF_COOKIE_PATH} 配置'
+        )
+    return auths
 
-def fetch_confluence(auth):
+
+def load_conf_token():
+    # backward compat: return first available auth
+    auths = load_conf_auths()
+    return auths[0]
+
+
+def fetch_confluence(auth=None):
     log("拉取 Confluence 数据...")
     url = 'https://confluence.zhenguanyu.com/rest/api/content/917724867?expand=body.storage'
-    auth_type, auth_val = auth if isinstance(auth, tuple) else ('bearer', auth)
-    if auth_type == 'cookie':
-        headers = {'Cookie': auth_val, 'Accept': 'application/json'}
-    else:
-        headers = {'Authorization': f'Bearer {auth_val}', 'Accept': 'application/json'}
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=30) as r:
-        data = json.loads(r.read())
-    html = data['body']['storage']['value']
-    log(f"Confluence HTML: {len(html)} chars")
-    return html
+    auths = [auth] if auth else load_conf_auths()
+    last_err = None
+
+    for auth_type, auth_val in auths:
+        try:
+            req = urllib.request.Request(url, headers=_conf_headers(auth_type, auth_val))
+            with urllib.request.urlopen(req, timeout=30) as r:
+                body = r.read()
+            content_type = r.headers.get('Content-Type', '')
+
+            if 'json' not in content_type or not body.startswith(b'{'):
+                if b'login_page_identity' in body or body.lstrip().startswith(b'<!DOCTYPE'):
+                    last_err = f'{auth_type} 认证已过期（Confluence 返回登录页）'
+                else:
+                    last_err = f'{auth_type} 返回非 JSON（Content-Type: {content_type}）'
+                log(f'WARNING: {last_err}')
+                continue
+
+            data = json.loads(body)
+            html = data['body']['storage']['value']
+            log(f'Confluence HTML: {len(html)} chars (auth: {auth_type})')
+            return html, auth_type, auth_val
+        except Exception as e:
+            last_err = f'{auth_type}: {e}'
+            log(f'WARNING: {last_err}')
+
+    raise RuntimeError(
+        'Confluence 认证失败，无法拉取发版数据。\n'
+        f'请更新服务器凭证后重试：\n'
+        f'  • Bearer Token → {CONF_TOKEN_PATH}\n'
+        f'  • 浏览器 Cookie → {CONF_COOKIE_PATH}\n'
+        f'更新方法见 DEPLOY.md「Confluence 凭证」章节。\n'
+        f'最后错误: {last_err}'
+    )
 
 def parse_confluence_html(html, token=''):
     H_RE = re.compile(r'<h[123][^>]*>(.*?)</h[123]>', re.DOTALL | re.IGNORECASE)
@@ -554,9 +599,11 @@ def main():
 
     # Confluence
     try:
-        conf_auth = load_conf_token()
-        conf_html = fetch_confluence(conf_auth)
-        releases = parse_confluence_html(conf_html, conf_auth[1] if isinstance(conf_auth, tuple) else conf_auth)
+        conf_html, conf_auth_type, conf_auth_val = fetch_confluence()
+        user_token = conf_auth_val if conf_auth_type == 'bearer' else next(
+            (v for t, v in load_conf_auths() if t == 'bearer'), conf_auth_val
+        )
+        releases = parse_confluence_html(conf_html, user_token)
         if not releases:
             log("ERROR: Confluence 解析结果为空，中止")
             sys.exit(1)
