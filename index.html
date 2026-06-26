@@ -316,21 +316,29 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(79,142,247,.03)}
 .fbt-bar-wrap:hover .fbt-tip{display:block}
 .fbt-lbl{font-size:9px;color:#94a3b8;margin-top:5px;white-space:nowrap;transform:rotate(-45deg);transform-origin:top center;display:block;height:28px}
 .fbt-empty{color:#64748b;font-size:12px;text-align:center;padding:30px 0}
-/* Matrix */
-#fbMatrix{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:var(--sh)}
-/* Insight: wordcloud + suggestions */
-#fbInsight{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:16px}
-.fbi-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px}
-.fbi-cloud{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:80px;padding:4px 0}
-.fbi-word{cursor:pointer;line-height:1.4;transition:opacity .15s;display:inline-block}
+/* Matrix + word cloud row */
+.fb-analytics-row{display:grid;grid-template-columns:minmax(300px,1.4fr) minmax(240px,1fr);gap:16px;margin-bottom:16px;align-items:start}
+#fbMatrix{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:var(--sh);width:100%;height:fit-content}
+#fbWordCloud{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;box-shadow:var(--sh);width:100%;height:fit-content}
+#fbOverview{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px;box-shadow:var(--sh)}
+.fbi-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.fbi-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:0}
+.fbi-clear-btn{font-size:11px;padding:4px 12px;border-radius:14px;border:1px solid rgba(79,142,247,.35);background:rgba(79,142,247,.1);color:#7badff;cursor:pointer;white-space:nowrap;line-height:1.4}
+.fbi-clear-btn:hover{background:rgba(79,142,247,.22);border-color:rgba(79,142,247,.55)}
+.fbi-cloud{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:flex-start;align-content:flex-start;padding:0}
+.fbi-word{cursor:pointer;line-height:1.35;transition:opacity .15s,background .15s;display:inline-block}
 .fbi-word:hover{opacity:.75;text-decoration:underline}
-.fbi-suggestions{display:flex;flex-direction:column;gap:10px}
-.fbi-sug{background:rgba(79,142,247,.07);border:1px solid rgba(79,142,247,.18);border-radius:10px;padding:10px 13px}
-.fbi-sug-title{font-size:12px;font-weight:700;color:#7badff;margin-bottom:5px}
-.fbi-sug-row{font-size:11px;color:var(--text2);line-height:1.6}
-.fbi-sug-row span{color:#94a3b8;font-weight:600}
+.fbi-word.active{color:#fff !important;background:rgba(79,142,247,.88);padding:2px 7px;border-radius:6px;transform:none !important;text-decoration:none;opacity:1}
+.fbo-summary{font-size:12px;color:var(--text);line-height:1.75;padding:12px 14px;background:rgba(79,142,247,.06);border:1px solid rgba(79,142,247,.15);border-radius:10px;margin-bottom:14px}
+.fbo-findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.fbo-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.fbo-card-hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.fbo-card-title{font-size:12px;font-weight:700;color:#7badff}
+.fbo-card-badge{font-size:10px;color:#94a3b8;white-space:nowrap}
+.fbo-card-row{font-size:11px;color:var(--text2);line-height:1.65;margin-top:4px}
+.fbo-card-row b{color:#94a3b8;font-weight:600}
 .fbm-title{font-size:13px;font-weight:600;margin-bottom:14px;color:var(--text)}
-.fbm-table{width:100%;border-collapse:collapse;font-size:11px;overflow-x:auto;display:block}
+.fbm-table{width:100%;border-collapse:collapse;font-size:11px;table-layout:auto}
 .fbm-table th,.fbm-table td{border:1px solid rgba(255,255,255,.07);padding:5px 8px;text-align:center;white-space:nowrap}
 .fbm-table th{background:rgba(255,255,255,.05);color:#94a3b8;font-weight:600}
 .fbm-table td.fbm-row-hd{background:rgba(255,255,255,.05);color:#94a3b8;font-weight:600;text-align:left}
@@ -344,7 +352,7 @@ tr:last-child td{border-bottom:none}tr:hover td{background:rgba(79,142,247,.03)}
 .fb-time{font-size:10px;color:var(--text2);margin-left:auto}
 .fb-desc{font-size:12px;color:var(--text);line-height:1.6}
 @media(max-width:768px){
-
+  .fb-analytics-row{grid-template-columns:1fr}
 }
 /* 需求溯源 */
 .trace-btn{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;border:1px solid rgba(79,142,247,.4);background:rgba(79,142,247,.08);color:#4f8ef7;font-size:11px;cursor:pointer;margin-left:8px;white-space:nowrap;transition:background .15s}
@@ -816,10 +824,11 @@ function sfRenderTrend(data){
           </div>
           <div class="fb-stats" id="fbStats"></div>
           <div id="fbTrend"></div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px">
-            <div id="fbMatrix" style="flex:3;min-width:300px"></div>
-            <div id="fbInsight" style="flex:2;min-width:260px"></div>
+          <div class="fb-analytics-row">
+            <div id="fbMatrix"></div>
+            <div id="fbWordCloud"></div>
           </div>
+          <div id="fbOverview"></div>
           <div id="fbList"></div>
           <div id="fbPager" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 0;flex-wrap:wrap"></div>
         </div>
@@ -921,7 +930,9 @@ function switchView(v){
       const paneId=activePane?activePane.id.replace('voicesPane-',''):'tickets';
       if(!activePane){switchVoicesTab('tickets');}
       else if(paneId==='tickets')renderTickets();
-      else if(paneId==='feedback')renderFeedback();
+      else if(paneId==='feedback'){
+        if(FB_RAW&&FB_RAW.length) initFeedback();
+      }
       else if(paneId==='store')renderStore();
     });
   }
@@ -1277,11 +1288,8 @@ function switchVoicesTab(tab){
   });
   if(tab==='tickets')renderTickets();
   else if(tab==='feedback'){
-    if(typeof FB_RAW!=='undefined'&&FB_RAW.length>0&&document.getElementById('fbProductFilter').options.length<=1){
-      initFeedback();
-    } else {
-      renderFeedback();
-    }
+    if(FB_RAW&&FB_RAW.length) initFeedback();
+    else ensureVoicesData().then(function(ok){ if(ok) initFeedback(); });
   }
   else if(tab==='store')renderStore();
 }
@@ -1664,13 +1672,24 @@ const FB_PAGE_SIZE = 30;
 function fbResetPage(){ fbPage = 1; }
 
 function initFeedback(){
-  const devices=[...new Set(FB.map(f=>f.device))].filter(Boolean).sort();
+  resetSelectOptions('fbProductFilter');
+  resetSelectOptions('fbTypeFilter');
+  fbActiveCat='';
+  fbPage=1;
+  const devices=[...new Set(FB.map(f=>f.device))].filter(Boolean).sort((a,b)=>{
+    return FB.filter(f=>f.device===b).length-FB.filter(f=>f.device===a).length;
+  });
   const dSel=document.getElementById('fbProductFilter');
-  devices.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=d;dSel.appendChild(o);});
-  const cats=new Set();
-  FB.forEach(f=>{ f.category.split(',').forEach(c=>{c=c.trim();if(c)cats.add(c);}); });
+  devices.forEach(d=>{
+    const n=FB.filter(f=>f.device===d).length;
+    const o=document.createElement('option');o.value=d;o.textContent=`${d} (${n})`;dSel.appendChild(o);
+  });
+  const catCounts={};
+  FB.forEach(f=>{ f.category.split(',').forEach(c=>{c=c.trim();if(c)catCounts[c]=(catCounts[c]||0)+1;}); });
   const tSel=document.getElementById('fbTypeFilter');
-  [...cats].sort().forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;tSel.appendChild(o);});
+  Object.entries(catCounts).sort((a,b)=>b[1]-a[1]).forEach(([c,n])=>{
+    const o=document.createElement('option');o.value=c;o.textContent=`${c} (${n})`;tSel.appendChild(o);
+  });
   renderFeedback();
 }
 
@@ -1721,8 +1740,9 @@ function renderFeedback(){
   // ── Feature 3: Device × Category matrix ──────────────────
   renderFbMatrix(data, top8.map(([t])=>t));
 
-  // ── Feature 4: Word cloud + Insight suggestions ───────────
-  renderFbInsight(data);
+  // ── Feature 4: Word cloud + data overview ───────────
+  renderFbWordCloud(data);
+  renderFbOverview(data, top8);
 
   // Paged list
   const total=data.length;
@@ -1769,41 +1789,62 @@ function renderFeedback(){
 }
 
 // ── Render time-trend bar chart ────────────────────────────
+function parseFbDay(time) {
+  const raw = (time || '').trim().split(' ')[0];
+  if (!raw) return null;
+  const parts = raw.replace(/\//g, '-').split('-').map(Number);
+  if (parts.length < 3 || parts.some(n => !n)) return null;
+  return new Date(parts[0], parts[1] - 1, parts[2]);
+}
+function formatFbDay(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}/${m}/${day}`;
+}
 function renderFbTrend(data) {
   const trendEl = document.getElementById('fbTrend');
   const dayCounts = {};
+  let maxDate = null;
   data.forEach(f => {
-    const d = (f.time || '').split(' ')[0];
-    if (d) dayCounts[d] = (dayCounts[d] || 0) + 1;
+    const dt = parseFbDay(f.time);
+    if (!dt) return;
+    const key = formatFbDay(dt);
+    dayCounts[key] = (dayCounts[key] || 0) + 1;
+    if (!maxDate || dt > maxDate) maxDate = dt;
   });
-  const allDays = Object.keys(dayCounts).sort();
-  const days = allDays.slice(-30);
-  if (!days.length) {
-    trendEl.innerHTML = '<div class="fbt-title">📈 时间趋势</div><div class="fbt-empty">暂无日期数据</div>';
+  if (!maxDate) {
+    trendEl.innerHTML = '<div class="fbt-title">📈 时间趋势</div><div class="fbt-empty">暂无有效日期数据</div>';
     return;
   }
-  const maxVal = Math.max(...days.map(d => dayCounts[d]));
-  // Y axis ticks: 0, 25%, 50%, 75%, 100%
-  const yTicks = [maxVal, Math.round(maxVal*0.75), Math.round(maxVal*0.5), Math.round(maxVal*0.25), 0];
-  const yAxisHtml = yTicks.map(v=>`<span>${v}</span>`).join('');
-  // Grid lines at 75%, 50%, 25%
-  const gridHtml = [75,50,25].map(p=>`<div class="fbt-gridline" style="bottom:calc(${p}% + 0px)"></div>`).join('');
-  // Bars — show date label only for first of month or every 5th
+  const days = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(maxDate);
+    d.setDate(d.getDate() - i);
+    days.push(formatFbDay(d));
+  }
+  const rangeTotal = days.reduce((s, d) => s + (dayCounts[d] || 0), 0);
+  const maxVal = Math.max(1, ...days.map(d => dayCounts[d] || 0));
+  const yTicks = [maxVal, Math.round(maxVal * 0.75), Math.round(maxVal * 0.5), Math.round(maxVal * 0.25), 0];
+  const yAxisHtml = yTicks.map(v => `<span>${v}</span>`).join('');
+  const gridHtml = [75, 50, 25].map(p => `<div class="fbt-gridline" style="bottom:calc(${p}% + 0px)"></div>`).join('');
   let bars = '';
   days.forEach((d, i) => {
     const v = dayCounts[d] || 0;
-    const pct = maxVal > 0 ? Math.max(2, Math.round((v / maxVal) * 100)) : 2;
-    const shortDate = d.replace(/^\d{4}\//, '');
-    const showLbl = true;
+    const pct = maxVal > 0 ? Math.max(v > 0 ? 4 : 1, Math.round((v / maxVal) * 100)) : 1;
+    const shortDate = d.slice(5);
+    const showLbl = i % 5 === 0 || i === days.length - 1;
     bars += `<div class="fbt-bar-wrap">
       <div class="fbt-bar" style="height:${pct}%">
         <span class="fbt-tip">${d}<br>${v} 条</span>
       </div>
-      <div class="fbt-lbl">${shortDate}</div>
+      <div class="fbt-lbl" style="visibility:${showLbl ? 'visible' : 'hidden'}">${shortDate}</div>
     </div>`;
   });
+  const endLbl = days[days.length - 1].slice(5);
+  const startLbl = days[0].slice(5);
   trendEl.innerHTML = `
-    <div class="fbt-title">📈 时间趋势（最近 ${days.length} 天，共 ${data.length} 条）</div>
+    <div class="fbt-title">📈 时间趋势（${startLbl} ~ ${endLbl}，30 天 ${rangeTotal} 条 / 当前筛选 ${data.length} 条）</div>
     <div class="fbt-wrap">
       <div class="fbt-yaxis">${yAxisHtml}</div>
       <div class="fbt-chart-area" style="flex:1;position:relative">
@@ -1815,166 +1856,196 @@ function renderFbTrend(data) {
     </div>`;
 }
 
-// ── Render word cloud + optimisation suggestions ──────────
-function renderFbInsight(data) {
-  const el = document.getElementById('fbInsight');
-  if (!el) return;
+// ── Render word cloud ─────────────────────────────────────
+const FB_STOPWORDS = new Set(['的','了','是','在','我','有','和','就','不','人','都','一','一个','没有','可以','这个','什么','怎么','为什么','但是','然后','因为','所以','如果','还是','已经','现在','感觉','觉得','希望','需要','能够','应该','一直','一些','很多','问题','反馈','建议','功能','没','也','还','要','会','用','他','她','它','们','去','来','到','对','给','说','好','很','大','小','多','少','中','上','下','后','前','时','里','这','那','哪','啊','吧','吗','哦','嗯','用户','设备','学练机','学习机','孩子','我家','自己','无法','不能','进行','使用','显示','出现','版本','系统']);
 
-  const STOPWORDS = new Set(['的','了','是','在','我','有','和','就','不','人','都','一','一个','没有','可以','这个','什么','怎么','为什么','但是','然后','因为','所以','如果','还是','已经','现在','感觉','觉得','希望','需要','能够','应该','一直','一些','很多','问题','反馈','建议','功能','没','也','还','要','会','用','他','她','它','们','去','来','到','对','给','说','好','很','大','小','多','少','中','上','下','后','前','时','里','这','那','哪','啊','吧','吗','哦','嗯']);
-
-  // Extract words: split by non-CJK or use 2-gram on CJK runs
-  function extractWords(text) {
-    const words = [];
-    // Split by punctuation/spaces first
-    const segments = text.split(/[\s\u3000\uff0c\u3002\uff01\uff1f\u300a\u300b\u201c\u201d\u2018\u2019\uff08\uff09\u3001，。！？《》""''（）、；：\-—…·•,.!?;:()\[\]{}<>\/\\|@#$%^&*+=~`'"]/);
-    segments.forEach(seg => {
-      // If segment has CJK chars, do bigrams + trigrams
-      if (/[\u4e00-\u9fff]/.test(seg)) {
-        for (let i = 0; i < seg.length - 1; i++) {
-          const bi = seg.slice(i, i + 2);
-          if (bi.length === 2 && /[\u4e00-\u9fff]{2}/.test(bi)) words.push(bi);
-          if (i < seg.length - 2) {
-            const tri = seg.slice(i, i + 3);
-            if (/[\u4e00-\u9fff]{3}/.test(tri)) words.push(tri);
-          }
-        }
-      } else if (seg.length >= 2) {
-        words.push(seg.toLowerCase());
+function extractFbWords(text) {
+  const words = [];
+  const segments = text.split(/[\s\u3000\uff0c\u3002\uff01\uff1f\u300a\u300b\u201c\u201d\u2018\u2019\uff08\uff09\u3001，。！？《》""''（）、；：\-—…·•,.!?;:()\[\]{}<>\/\\|@#$%^&*+=~`'"]/);
+  segments.forEach(seg => {
+    if (/[\u4e00-\u9fff]/.test(seg)) {
+      for (let i = 0; i < seg.length - 1; i++) {
+        const bi = seg.slice(i, i + 2);
+        if (/[\u4e00-\u9fff]{2}/.test(bi)) words.push(bi);
       }
-    });
-    return words;
-  }
+    } else if (seg.length >= 2) {
+      words.push(seg.toLowerCase());
+    }
+  });
+  return words;
+}
 
-  // Count word frequencies across all descs
+function selectFbWord(word) {
+  document.getElementById('fbSearch').value = word;
+  fbResetPage();
+  renderFeedback();
+}
+function clearFbWordFilter() {
+  const inp = document.getElementById('fbSearch');
+  if (inp) inp.value = '';
+  fbResetPage();
+  renderFeedback();
+}
+
+function renderFbWordCloud(data) {
+  const el = document.getElementById('fbWordCloud');
+  if (!el) return;
+  const activeKw = (document.getElementById('fbSearch').value || '').trim();
   const freq = {};
   data.forEach(f => {
     if (!f.desc) return;
-    extractWords(f.desc).forEach(w => {
-      if (STOPWORDS.has(w)) return;
+    extractFbWords(f.desc).forEach(w => {
+      if (FB_STOPWORDS.has(w) || w.length < 2) return;
       freq[w] = (freq[w] || 0) + 1;
     });
   });
-
-  const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
-  const top30 = sorted.slice(0, 30);
-
-  // ── Word Cloud ──────────────────────────────────────────
+  const top30 = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 30);
   let cloudHtml = '';
-  if (top30.length === 0) {
-    cloudHtml = '<div style="color:#64748b;font-size:12px;padding:12px 0">暂无词频数据</div>';
+  if (!top30.length) {
+    cloudHtml = '<div style="color:#64748b;font-size:12px;padding:4px 0">暂无词频数据</div>';
   } else {
     const maxFreq = top30[0][1];
     const minFreq = top30[top30.length - 1][1];
     const range = Math.max(1, maxFreq - minFreq);
-    top30.forEach(([word, cnt]) => {
+    top30.forEach(([word, cnt], idx) => {
+      const isActive = activeKw && (word === activeKw || word.toLowerCase() === activeKw.toLowerCase());
       const ratio = (cnt - minFreq) / range;
-      const fontSize = Math.round(12 + ratio * 16); // 12~28px
-      const alpha = (0.4 + ratio * 0.6).toFixed(2);  // 0.4~1.0
-      const rotate = (Math.floor(Math.random() * 31) - 15); // -15~+15
-      const escapedWord = word.replace(/'/g, "\\'");
-      cloudHtml += `<span class="fbi-word" title="${word} (${cnt}次)" style="font-size:${fontSize}px;color:rgba(79,142,247,${alpha});transform:rotate(${rotate}deg)" onclick="document.getElementById('fbSearch').value='${escapedWord}';fbResetPage();renderFeedback()">${word}</span>`;
+      const fontSize = Math.round(12 + ratio * 18);
+      const alpha = (0.45 + ratio * 0.55).toFixed(2);
+      const rotate = isActive ? 0 : ((word.charCodeAt(0) + idx * 7) % 25) - 12;
+      const escapedWord = word.replace(/'/g, "\\'").replace(/\\/g, '\\\\');
+      cloudHtml += `<span class="fbi-word${isActive ? ' active' : ''}" title="${word}（${cnt} 次）" style="font-size:${fontSize}px;color:rgba(79,142,247,${alpha});transform:rotate(${rotate}deg)" onclick="selectFbWord('${escapedWord}')">${word}</span>`;
     });
   }
+  const clearBtn = activeKw
+    ? `<button type="button" class="fbi-clear-btn" onclick="clearFbWordFilter()">✕ 清除「${esc(activeKw)}」</button>`
+    : '';
+  el.innerHTML = `<div class="fbi-hd"><div class="fbi-title">☁️ 高频词云</div>${clearBtn}</div><div class="fbi-cloud">${cloudHtml}</div>`;
+}
 
-  // ── Optimisation Suggestions ────────────────────────────
-  // Top 3 categories by count
+function topFbKeywords(data, cat, limit) {
+  const catFreq = {};
+  data.forEach(f => {
+    if (!f.category.split(',').map(s => s.trim()).includes(cat) || !f.desc) return;
+    extractFbWords(f.desc).forEach(w => {
+      if (FB_STOPWORDS.has(w)) return;
+      catFreq[w] = (catFreq[w] || 0) + 1;
+    });
+  });
+  return Object.entries(catFreq).sort((a, b) => b[1] - a[1]).slice(0, limit);
+}
+
+function topFbDevice(data, subset) {
+  const devCounts = {};
+  subset.forEach(f => {
+    if (!f.device) return;
+    devCounts[f.device] = (devCounts[f.device] || 0) + 1;
+  });
+  const best = Object.entries(devCounts).sort((a, b) => b[1] - a[1])[0];
+  return best ? { device: best[0], count: best[1] } : null;
+}
+
+function fbOverviewAction(cat) {
+  const map = {
+    '教材版本': '拉取未覆盖的年级×教材版本清单，与内容/配置同学对齐补全节奏',
+    '功能缺失': '按高频诉求做需求池归类，区分「已有但未找到」与「确实未做」',
+    '功能问题': '按设备与功能模块聚类 badcase，优先修影响面大的稳定性问题',
+    '系统运行': '排查崩溃、卡顿、联网等系统类问题，联动研测看设备/版本分布',
+    '内容准确性': '对高频学科/题型做内容抽检，建立错题复核机制',
+    '版本未更新': '核对发版触达与升级链路，确认用户侧版本是否滞后',
+    '内容问题': '定位具体章节/题型/资源，安排内容侧专项修复',
+    '批改错误': '按题型抽样复核批改结果，同步研究组优化识别/判分',
+  };
+  for (const key of Object.keys(map)) {
+    if (cat.includes(key)) return map[key];
+  }
+  return '结合下方关键词抽样阅读原声，确认是体验问题还是需求缺口';
+}
+
+function renderFbOverview(data, top8) {
+  const el = document.getElementById('fbOverview');
+  if (!el) return;
+  const total = data.length;
+  if (!total) {
+    el.innerHTML = '<div class="fbi-title">📋 数据洞察</div><div style="color:#64748b;font-size:12px">暂无反馈数据</div>';
+    return;
+  }
   const catCounts = {};
   data.forEach(f => {
-    (f.category || '').split(',').forEach(c => {
+    f.category.split(',').forEach(c => {
       c = c.trim();
       if (c) catCounts[c] = (catCounts[c] || 0) + 1;
     });
   });
-  const top3cats = Object.entries(catCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  const topCats = Object.entries(catCounts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+  const devCounts = {};
+  data.forEach(f => { if (f.device) devCounts[f.device] = (devCounts[f.device] || 0) + 1; });
+  const topDev = Object.entries(devCounts).sort((a, b) => b[1] - a[1])[0];
+  const topDevPct = topDev ? ((topDev[1] / total) * 100).toFixed(0) : 0;
+  const dates = data.map(f => parseFbDay(f.time)).filter(Boolean).sort((a, b) => a - b);
+  const minD = dates.length ? formatFbDay(dates[0]) : '-';
+  const maxD = dates.length ? formatFbDay(dates[dates.length - 1]) : '-';
+  const top2Pct = topCats.slice(0, 2).reduce((s, [, n]) => s + n, 0);
+  const top2Share = ((top2Pct / total) * 100).toFixed(0);
+  const summary = `当前筛选 <b>${total}</b> 条反馈，时间跨度 <b>${minD}</b> ~ <b>${maxD}</b>。` +
+    (topCats.length >= 2
+      ? `<b>${esc(topCats[0][0])}</b>、<b>${esc(topCats[1][0])}</b> 合计占 <b>${top2Share}%</b>；`
+      : topCats.length
+        ? `<b>${esc(topCats[0][0])}</b> 占比最高；`
+        : '') +
+    (topDev ? `<b>${esc(topDev[0])}</b> 设备贡献 <b>${topDevPct}%</b>。` : '');
 
-  // For each category, find the top keyword in that category's descs
-  function topWordForCat(cat) {
-    const catFreq = {};
-    data.forEach(f => {
-      if (!f.category.split(',').map(s=>s.trim()).includes(cat)) return;
-      if (!f.desc) return;
-      extractWords(f.desc).forEach(w => {
-        if (STOPWORDS.has(w)) return;
-        catFreq[w] = (catFreq[w] || 0) + 1;
-      });
-    });
-    const best = Object.entries(catFreq).sort((a,b)=>b[1]-a[1]);
-    return best.length ? best[0][0] : '';
-  }
-
-  function buildSuggestion(cat, count, keyword) {
-    let title = '';
-    let core = '';
-    let suggest = '';
-    if (cat.includes('教材版本')) {
-      title = `补全 ${keyword} 教材版本覆盖`;
-      core = `部分用户使用的 ${keyword} 版本教材尚未完整覆盖`;
-      suggest = `优先补充 ${keyword} 相关版本，提升版本适配率`;
-    } else if (cat.includes('功能缺失')) {
-      title = `新增 ${keyword} 功能`;
-      core = `用户普遍缺少 ${keyword} 相关能力支持`;
-      suggest = `在近期版本中规划 ${keyword} 功能迭代`;
-    } else if (cat.includes('功能问题')) {
-      title = `修复 ${keyword} 相关问题`;
-      core = `${keyword} 功能存在稳定性或体验问题`;
-      suggest = `定位并修复 ${keyword} 异常，提升使用稳定性`;
-    } else if (cat.includes('内容准确性')) {
-      title = `提升 ${keyword} 内容准确性`;
-      core = `${keyword} 相关内容存在准确性质疑`;
-      suggest = `对 ${keyword} 涉及内容进行专项核查和修正`;
-    } else {
-      title = `优化 ${cat} 体验（${keyword}）`;
-      core = `${cat} 领域存在较多 ${keyword} 相关反馈`;
-      suggest = `针对 ${keyword} 深入分析并改进 ${cat} 整体体验`;
-    }
-    return { title, core, suggest };
-  }
-
-  const nums = ['①','②','③'];
-  let sugHtml = '';
-  if (top3cats.length === 0) {
-    sugHtml = '<div style="color:#64748b;font-size:12px">暂无分类数据</div>';
-  } else {
-    top3cats.forEach(([cat, count], i) => {
-      const kw = topWordForCat(cat) || cat;
-      const s = buildSuggestion(cat, count, kw);
-      sugHtml += `<div class="fbi-sug">
-        <div class="fbi-sug-title">${nums[i]} ${s.title}<span style="font-weight:400;color:#64748b;font-size:10px;margin-left:6px">（受影响 ${count} 条）</span></div>
-        <div class="fbi-sug-row"><span>核心问题：</span>${s.core}</div>
-        <div class="fbi-sug-row"><span>建议：</span>${s.suggest}</div>
-      </div>`;
-    });
-  }
+  let cards = '';
+  topCats.forEach(([cat, count], i) => {
+    const subset = data.filter(f => f.category.split(',').map(s => s.trim()).includes(cat));
+    const pct = ((count / total) * 100).toFixed(1);
+    const dev = topFbDevice(data, subset);
+    const devNote = dev ? `${dev.device} ${((dev.count / count) * 100).toFixed(0)}%` : '—';
+    const kws = topFbKeywords(data, cat, 3).map(([w, n]) => `${w}(${n})`).join('、') || '—';
+    const sample = subset.find(f => (f.desc || '').length > 12);
+    const quote = sample ? `「${sample.desc.trim().slice(0, 48)}${sample.desc.length > 48 ? '…' : ''}」` : '';
+    cards += `<div class="fbo-card">
+      <div class="fbo-card-hd">
+        <span class="fbo-card-title">${['①','②','③'][i]} ${esc(cat)}</span>
+        <span class="fbo-card-badge">${count} 条 · ${pct}%</span>
+      </div>
+      <div class="fbo-card-row"><b>集中设备：</b>${devNote}</div>
+      <div class="fbo-card-row"><b>高频词：</b>${kws}</div>
+      ${quote ? `<div class="fbo-card-row"><b>典型原声：</b>${esc(quote)}</div>` : ''}
+      <div class="fbo-card-row"><b>建议动作：</b>${fbOverviewAction(cat)}</div>
+    </div>`;
+  });
 
   el.innerHTML = `
-    <div>
-      <div class="fbi-title">☁️ 高频词云</div>
-      <div class="fbi-cloud">${cloudHtml}</div>
-    </div>
-    <div>
-      <div class="fbi-title">💡 优化建议</div>
-      <div class="fbi-suggestions">${sugHtml}</div>
-    </div>
-  `;
+    <div class="fbi-title">📋 数据洞察</div>
+    <div class="fbo-summary">${summary}</div>
+    <div class="fbo-findings">${cards}</div>`;
 }
 
 // ── Render device × category matrix ───────────────────────
 function renderFbMatrix(data, top8cats) {
   const matrixEl = document.getElementById('fbMatrix');
-  const devices = ['S2', 'S6', 'E1', 'S1', 'A1'];
-  // Build count map
+  const devCounts = {};
+  data.forEach(f => {
+    if (!f.device) return;
+    devCounts[f.device] = (devCounts[f.device] || 0) + 1;
+  });
+  const devices = Object.entries(devCounts).sort((a, b) => b[1] - a[1]).map(([d]) => d);
+  if (!devices.length) {
+    matrixEl.innerHTML = '<div class="fbm-title">📊 设备 × 分类分布</div><div class="fbt-empty">暂无设备数据</div>';
+    return;
+  }
   const counts = {};
   data.forEach(f => {
     const dev = f.device;
-    if (!devices.includes(dev)) return;
+    if (!dev) return;
     f.category.split(',').forEach(c => {
       c = c.trim();
-      if (!c) return;
+      if (!c || !top8cats.includes(c)) return;
       const key = dev + '::' + c;
       counts[key] = (counts[key] || 0) + 1;
     });
   });
-  // Get max for color scaling
   let maxVal = 0;
   devices.forEach(dev => {
     top8cats.forEach(cat => {
@@ -1982,22 +2053,21 @@ function renderFbMatrix(data, top8cats) {
       if (v > maxVal) maxVal = v;
     });
   });
-  // Build table
   const shortCat = c => c.length > 8 ? c.slice(0, 7) + '…' : c;
   let thead = '<tr><th>设备 \\ 分类</th>' + top8cats.map(c => `<th title="${c}">${shortCat(c)}</th>`).join('') + '</tr>';
   let tbody = devices.map(dev => {
+    const rowTotal = devCounts[dev] || 0;
     const cells = top8cats.map(cat => {
       const v = counts[dev + '::' + cat] || 0;
-      const alpha = maxVal > 0 && v > 0 ? (0.12 + 0.88 * v / maxVal).toFixed(2) : 0;
+      const alpha = maxVal > 0 && v > 0 ? (0.15 + 0.85 * v / maxVal).toFixed(2) : 0;
       const bg = v > 0 ? `rgba(79,142,247,${alpha})` : 'transparent';
       return `<td style="background:${bg}">${v || ''}</td>`;
     }).join('');
-    return `<tr><td class="fbm-row-hd">${dev}</td>${cells}</tr>`;
+    return `<tr><td class="fbm-row-hd" title="${rowTotal} 条">${dev}</td>${cells}</tr>`;
   }).join('');
   matrixEl.innerHTML = `<div class="fbm-title">📊 设备 × 分类分布</div><div style="overflow-x:auto"><table class="fbm-table"><thead>${thead}</thead><tbody>${tbody}</tbody></table></div>`;
 }
 function fbGo(p){ fbPage=p; renderFeedback(); document.getElementById('feedbackView').scrollIntoView({behavior:'smooth'}); }
-initFeedback();
 // ─── 暴露数据变量到全局，供第三个 script 块使用 ───
 syncGlobalData();
 window.updateTKRange = updateTKRange;
