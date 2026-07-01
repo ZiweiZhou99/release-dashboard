@@ -14,6 +14,7 @@ python3 scripts/fetch_tickets.py --days "$DAYS"
 
 echo "==> 同步 tickets.json 到服务器..."
 scp -i "$KEY" -o StrictHostKeyChecking=no \
+  -o ConnectTimeout=20 -o ServerAliveInterval=20 -o ServerAliveCountMax=3 \
   "$ROOT/data/tickets.json" \
   "$SERVER:$REMOTE_DIR/data/tickets.json"
 

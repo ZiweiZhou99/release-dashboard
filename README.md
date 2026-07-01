@@ -44,7 +44,7 @@
 python3 update_data.py
 ```
 
-工单拉取（需 `work-order.cookie`）：
+工单拉取（优先使用 `ic` 动态 Cookie，失败时回退 `work-order.cookie`）：
 
 ```bash
 python3 scripts/fetch_tickets.py --days 7
@@ -68,6 +68,41 @@ python3 scripts/export_feishu_voice_closure.py --json-only --json-out \
 ```
 
 产出：`data/voice_closure_ledger.json`、`voice_closure_links.json`、`voice_closure_state.json`，以及可导入飞书的 `exports/feishu/*.csv`。
+
+### 4. 自动化同步（推荐，日常 0~1 分钟）
+
+首次安装定时任务（macOS）：
+
+```bash
+bash scripts/setup_launchd.sh
+```
+
+安装后会自动执行：
+
+- 工作日 `11:00`：执行 `scripts/sync_all_local.sh`（发版 + 工单 + 收件箱导入）
+- 每小时：执行 `scripts/import_inbox_upload.sh`（仅处理收件箱文件）
+
+日常你只需要把不同来源文件放到以下目录（没有新文件可不操作）：
+
+- `imports/inbox/feedback/`：用户反馈 CSV/XLSX
+- `imports/inbox/store/`：门店反馈 CSV/XLSX
+- `imports/inbox/nps/`：NPS CSV/XLSX（文件名需带 `month1`/`m1` 或 `month3`/`m3`）
+
+收件箱文件会自动上传并归档到：
+
+- 成功：`imports/archive/success/*`
+- 失败：`imports/archive/failed/*`
+
+手动补跑（异常时）：
+
+```bash
+bash scripts/sync_all_local.sh
+```
+
+认证说明：
+
+- 推荐：安装并保持 `intranet-auth`（`ic` 命令），工单脚本会自动读取动态 Cookie，通常无需手动更新
+- 兜底：如果 `ic` 不可用，脚本会回退读取 `.config/tokens/work-order.cookie`
 
 ## 首屏加载优化
 

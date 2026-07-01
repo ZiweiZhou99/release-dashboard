@@ -18,6 +18,8 @@ import argparse
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
 import time
 import urllib.error
@@ -37,13 +39,15 @@ PAGE_SIZE = 50
 CLASSIFY_KEYWORD = '产研-学练机'
 # znyj 分类树中「产研-学练机(新)」根节点 ID（/turing/api/znyj/classify）
 CLASSIFY_ROOT_IDS = [9790]
+IC_DOMAIN = 'work-order.zhenguanyu.com'
+NO_PROXY_OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 
 def log(msg: str) -> None:
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
-def load_cookie() -> str:
+def load_cookie_from_file() -> str:
     if not os.path.exists(COOKIE_PATH):
         raise FileNotFoundError(
             f'未找到工单 Cookie: {COOKIE_PATH}\n'
@@ -55,8 +59,50 @@ def load_cookie() -> str:
     return cookie
 
 
-def api_get(path: str, params: dict | None = None, cookie: str | None = None) -> dict:
-    cookie = cookie or load_cookie()
+def load_cookie_from_ic() -> str:
+    ic_bin = shutil.which('ic')
+    if not ic_bin:
+        fallback = os.path.join(os.path.expanduser('~'), '.local/bin/ic')
+        if os.path.exists(fallback):
+            ic_bin = fallback
+    if not ic_bin:
+        raise FileNotFoundError('未找到 ic 命令')
+    proc = subprocess.run([ic_bin, IC_DOMAIN], capture_output=True, text=True, check=False)
+    out = (proc.stdout or '').strip()
+    err = (proc.stderr or '').strip()
+    if proc.returncode != 0:
+        raise RuntimeError(out or err or f'ic 执行失败，退出码 {proc.returncode}')
+    if not out:
+        raise RuntimeError('ic 返回空 Cookie')
+    if out.startswith('{'):
+        try:
+            payload = json.loads(out)
+        except json.JSONDecodeError:
+            payload = None
+        if isinstance(payload, dict) and payload.get('error'):
+            raise RuntimeError(f'ic 返回错误: {payload.get("error")}: {payload.get("message", "")}')
+    return out
+
+
+def load_cookie() -> tuple[str, str]:
+    try:
+        cookie = load_cookie_from_ic()
+        return cookie, 'ic'
+    except Exception as ic_err:
+        log(f'工单认证: ic 不可用，回退本地文件 Cookie（{ic_err}）')
+        cookie = load_cookie_from_file()
+        return cookie, 'file'
+
+
+def api_get(
+    path: str,
+    params: dict | None = None,
+    cookie: str | None = None,
+    auth_source: str | None = None,
+) -> dict:
+    if not cookie:
+        cookie, auth_source = load_cookie()
+    auth_source = auth_source or 'manual'
     qs = urllib.parse.urlencode(params or {}, doseq=True)
     url = f'{path}?{qs}' if qs else path
     req = urllib.request.Request(
@@ -68,13 +114,22 @@ def api_get(path: str, params: dict | None = None, cookie: str | None = None) ->
         },
     )
     try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
+        with NO_PROXY_OPENER.open(req, timeout=60) as resp:
             body = resp.read().decode('utf-8')
     except urllib.error.HTTPError as e:
         snippet = e.read(300).decode('utf-8', errors='replace')
         if e.code in (401, 403):
+            if auth_source == 'ic':
+                hint = (
+                    f'工单 API 认证失败 (HTTP {e.code})，当前使用 ic 动态 Cookie。\n'
+                    '请在浏览器重新登录内网并访问 work-order 页面后重试。'
+                )
+            elif auth_source == 'file':
+                hint = f'工单 API 认证失败 (HTTP {e.code})，请更新 {COOKIE_PATH}'
+            else:
+                hint = f'工单 API 认证失败 (HTTP {e.code})，请检查认证信息'
             raise RuntimeError(
-                f'工单 API 认证失败 (HTTP {e.code})，请更新 {COOKIE_PATH}\n{snippet}'
+                f'{hint}\n{snippet}'
             ) from e
         raise RuntimeError(f'工单 API 错误 HTTP {e.code}: {snippet}') from e
     try:
@@ -202,7 +257,7 @@ def to_record(ticket: dict) -> dict | None:
     }
 
 
-def fetch_ticket_list(cookie: str, start_ms: int, end_ms: int) -> list[dict]:
+def fetch_ticket_list(cookie: str, start_ms: int, end_ms: int, auth_source: str) -> list[dict]:
     items: list[dict] = []
     page = 0
     total_page = None
@@ -220,7 +275,7 @@ def fetch_ticket_list(cookie: str, start_ms: int, end_ms: int) -> list[dict]:
             'menuId': MENU_ID,
             'q': q,
         }
-        resp = api_get(LIST_API, params, cookie=cookie)
+        resp = api_get(LIST_API, params, cookie=cookie, auth_source=auth_source)
         data = unwrap_payload(resp)
         batch = data.get('list') or []
         page_info = data.get('pageInfo') or {}
@@ -236,8 +291,8 @@ def fetch_ticket_list(cookie: str, start_ms: int, end_ms: int) -> list[dict]:
     return items
 
 
-def fetch_ticket_detail(ticket_id: int, cookie: str) -> dict:
-    resp = api_get(f'{DETAIL_API}/{ticket_id}', cookie=cookie)
+def fetch_ticket_detail(ticket_id: int, cookie: str, auth_source: str) -> dict:
+    resp = api_get(f'{DETAIL_API}/{ticket_id}', cookie=cookie, auth_source=auth_source)
     return unwrap_ticket(resp)
 
 
@@ -254,8 +309,9 @@ def merge_records(existing: list[dict], new_items: list[dict]) -> list[dict]:
 
 
 def check_auth() -> None:
-    cookie = load_cookie()
-    resp = api_get(f'{BASE_URL}/turing/api/{BIZ_ID}/users/current', cookie=cookie)
+    cookie, auth_source = load_cookie()
+    log(f'工单认证: 使用 {"ic 动态 Cookie" if auth_source == "ic" else "本地 Cookie 文件"}')
+    resp = api_get(f'{BASE_URL}/turing/api/{BIZ_ID}/users/current', cookie=cookie, auth_source=auth_source)
     user = unwrap_ticket(resp)
     name = user.get('nickname') or user.get('ldapId') or user.get('name') or user
     log(f'JUST 登录 OK ({BIZ_ID}): {name}')
@@ -276,7 +332,8 @@ def main() -> int:
         check_auth()
         return 0
 
-    cookie = load_cookie()
+    cookie, auth_source = load_cookie()
+    log(f'工单认证: 使用 {"ic 动态 Cookie" if auth_source == "ic" else "本地 Cookie 文件"}')
     if args.date_from or args.date_to:
         if not args.date_from or not args.date_to:
             parser.error('指定日期区间时需同时提供 --from 与 --to')
@@ -289,7 +346,7 @@ def main() -> int:
     end_ms = int(end.timestamp() * 1000)
     log(f'拉取区间: {start:%Y-%m-%d %H:%M} ~ {end:%Y-%m-%d %H:%M}')
 
-    raw_list = fetch_ticket_list(cookie, start_ms, end_ms)
+    raw_list = fetch_ticket_list(cookie, start_ms, end_ms, auth_source=auth_source)
     need_detail = not args.no_detail and any(
         not (x.get('template') and x.get('values')) for x in raw_list
     )
@@ -303,7 +360,7 @@ def main() -> int:
         ticket = item
         if not args.no_detail and not (item.get('template') and item.get('values')):
             try:
-                ticket = fetch_ticket_detail(int(tid), cookie)
+                ticket = fetch_ticket_detail(int(tid), cookie, auth_source=auth_source)
             except Exception as e:
                 log(f'  详情 {tid} 失败: {e}')
             time.sleep(0.08)
